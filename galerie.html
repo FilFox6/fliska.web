@@ -85,21 +85,26 @@ body {
 .gradient-section {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: center;   /* Horizontálně na střed */
+  align-items: center;       /* Vertikálně na střed */
+  height: 100vh;             /* Výška na celou obrazovku */
+  text-align: center;        /* Zarovnání textu na střed */
+  padding: 0 20px;           /* Menší mezery po stranách pro menší displeje */
 }
 
 .gradient-text {
-  font-size: 12rem;
+  font-size: 12rem; /* uprav si podle potřeby */
   background-color: #fe6d11;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Bebas Neue', sans-serif;
   letter-spacing: 4px;
+  text-align: center;
+  line-height: 1;
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
 }
+
 
 @keyframes fadeIn {
   from {
@@ -312,8 +317,8 @@ footer {
   .gradient-text {
     font-size: 2rem;
     text-align: center;
-    letter-spacing: 2px;
     padding: 0 20px;
+    padding-top: 120px;
   }
 
   footer {
