@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animace obrázků</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+body {
+    overflow-x: hidden;
+    background-color: #000;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 10px 40px;
+    position: relative;
+    z-index: 1000;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+    transition: transform 0.4s ease-in-out;
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+.center-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 70px;
+}
+
+.center-nav a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding-bottom: 5px;
+}
+
+.center-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #fe6d11;
+    transition: width 0.4s ease;
+}
+
+.center-nav a:hover::after {
+    width: 100%;
+}
+
+/* Gradient sekce */
+.gradient-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.gradient-text {
+    font-size: 12rem;
+    background-color: #fe6d11;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    
+    /* VYHOĎ `position: absolute` */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.rounded-button {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 2px solid white;
+    border-radius: 25px;
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.rounded-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+    .gradient-text {
+        font-size: 3rem;
+        margin-top: -120px;
+    }
+
+    .center-nav {
+        gap: 40px;
+    }
+}
+
+/* MOBIL */
+@media (max-width: 576px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+    }
+
+    .center-nav {
+        position: static;
+        flex-direction: column;
+        gap: 20px;
+        transform: none;
+        margin-top: 10px;
+        align-items: flex-start;
+    }
+
+    .logo img {
+        width: 60px;
+    }
+
+    .gradient-text {
+        font-size: 2rem;
+        margin-top: -80px;
+    }
+
+    footer {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .rounded-button {
+        padding: 4px 12px;
+        font-size: 10px;
+    }
+}
+/*menu*/
+.menu-toggle {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1100;
+  color: white;
+}
+
+.full-menu {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fe6d11;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: top 0.6s ease-in-out;
+  z-index: 1050;
+}
+
+.full-menu.open {
+  top: 0;
+}
+
+.full-menu .close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+.full-menu .close-btn img {
+  width: 50px;
+  height: auto;
+}
+
+.menu-content h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 90px; /* větší velikost */
+  font-weight: 400;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+.menu-content h1 a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-content h1 a:hover {
+  color: white;
+}
+/* Boxy */
+.video-library {
+  background-color: black;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+  border-top: 5px solid #fe6d11;
+  border-bottom: 5px solid #fe6d11;
+  color: white;
+  text-align: center;
+  height: 100vh; /* Tohle udělá fullscreen výšku */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.video-library h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  margin-bottom: 40px;
+  color: #fe6d11;
+}
+
+.video-carousel {
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+.video-track {
+  display: inline-flex;
+  gap: 30px;
+  padding: 10px;
+}
+
+.video-item {
+  width: 360px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.video-item iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+}
+
+.video-item p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+
+
+    </style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Kliknutí na box
+    document.querySelectorAll(".box[data-expandable='true']").forEach(box => {
+      box.addEventListener("click", function (e) {
+        e.stopPropagation();
+        expandBox(this);
+      });
+    });
+
+    // Kliknutí na zpět
+    document.querySelectorAll(".close-btn-inside").forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        resetView();
+      });
+    });
+  });
+
+  function expandBox(clickedBox) {
+    // Reset stavu
+    resetView();
+
+    // Rozbalení daného boxu
+    clickedBox.classList.add("expanded");
+
+    // Skrytí ostatních
+    document.querySelectorAll(".box").forEach(box => {
+      if (box !== clickedBox) {
+        box.style.display = "none";
+      }
+    });
+  }
+
+  function resetView() {
+    // Vrácení všech boxů do výchozího stavu
+    document.querySelectorAll(".box").forEach(box => {
+      box.classList.remove("expanded");
+      box.style.display = "flex"; // obnoví zobrazení všech boxů
+    });
+  }
+  function toggleMenu() {
+  const menu = document.getElementById('fullMenu');
+  menu.classList.toggle('open');
+}
+</script>
+
+  
+    
+</head>
+<body>
+    <header>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+      <div class="full-menu" id="fullMenu">
+        <button class="close-btn" onclick="toggleMenu()">
+          
+        </button>  
+      
+        <div class="menu-content">
+          <h1><a href="projekt1_index.html">HLAVNÍ</a></h1>
+          <h1><a href="galerie.html">PORTFOLIO</a></h1>
+          <h1><a href="kurz.html">SNOWBOARDING</a></h1>
+          <h1><a href="Board.html">OVERVIEW</a></h1>
+        </div>
+      </div>
+    </header>
+
+    <div class="gradient-section">
+        <div class="gradient-text">PORTFOLIO</div>
+    </div>
+
+    <section class="video-library">
+      <h2>USA2025</h2>
+      <div class="video-carousel">
+        <div class="video-track">
+          <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/TVODXXXXXXX" title="Video 1" frameborder="0" allowfullscreen></iframe>
+            <p>Název videa</p>
+          </div>
+          <div class="video-item">
+            <iframe src="https://www.youtube.com/embed/TVODYYYYYYY" title="Video 2" frameborder="0" allowfullscreen></iframe>
+            <p>Druhé video</p>
+          </div>
+          <!-- přidej další video-itemy podle potřeby -->
+        </div>
+      </div>
+    </section>
+    
+ 
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/filip.liska/" target="_blank" class="rounded-button">Instagram</a>
+            <a href="https://www.youtube.com" target="_blank" class="rounded-button">YouTube</a>
+            <a href="https://www.tiktok.com" target="_blank" class="rounded-button">TikTok</a>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>

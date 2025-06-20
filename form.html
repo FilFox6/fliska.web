@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Přihláška na výuku</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: white;
+
+      background-position: left -100px center, right -100px center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: contain, contain;
+    }
+
+    .wrapper {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 120px;
+      height: auto;
+    }
+
+    .form-container {
+      background-color: #111;
+      padding: 30px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fe6d11;
+      font-size: 1.4rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    input, textarea, select {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      background-color: #222;
+      color: white;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid #f7941d;
+    }
+
+    button {
+      background-color: #fe6d11;
+      color: black;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffab40;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="logo">
+      <img src="Geometrická hlava lišky.png" alt="Logo">
+    </div>
+
+    <div class="form-container">
+      <h2>Přihláška na snowboardovou výuku</h2>
+      <form action="mailto:tvoje@email.cz" method="POST" enctype="text/plain">
+        <label for="name">Jméno a příjmení:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Telefon:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="level">Úroveň ježdění:</label>
+        <select id="level" name="level">
+          <option value="začátečník">Začátečník</option>
+          <option value="pokročilý">Pokročilý</option>
+          <option value="expert">Expert</option>
+        </select>
+
+        <label for="message">Zpráva / poznámka:</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+
+        <button type="submit">Odeslat přihlášku</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

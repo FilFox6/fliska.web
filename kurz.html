@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animované Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+
+    <style>
+      
+      /* ZÁKLAD */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    position: relative;
+    background-position: left -200px center, right -200px center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 50%;
+}
+
+
+
+/* HORNÍ NAVIGACE */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 10px 40px;
+    position: relative;
+    z-index: 1000;
+}
+
+.center-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 70px;
+}
+
+.center-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.center-nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: #fe6d11;
+    transition: width 0.4s ease;
+}
+
+.center-nav a:hover::after {
+    width: 100%;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+    transition: transform 0.4s ease-in-out;
+}
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+/* ÚVODNÍ SEKCE */
+.gradient-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+.gradient-text {
+    font-size: 12rem;
+    background-color: #fe6d11;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 4px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    
+    /* VYHOĎ `position: absolute` */
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* VIDEO SEKCE */
+.video-section {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Video jako pozadí */
+.intro-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+/* Overlay pro ztmavení videa */
+.video-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* lehké ztmavení */
+    z-index: 0;
+}
+
+/* Textová sekce nad videem */
+.video-content {
+    position: absolute;
+    text-align: center;
+    color: #fe6d11; /* ORANŽOVÁ barva textu */
+    font-family: 'Bebas Neue', sans-serif; /* Nastavený font */
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.video-content h2 {
+    font-size: 48px; /* Zvýrazněný nadpis */
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.video-content p {
+    font-size: 22px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+
+
+/* SEKCE OBSAHU */
+.section {
+    background-color: transparent;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 4rem;
+    font-family: 'Pacifico', cursive;
+    color: #fe6d11;
+    margin-bottom: 30px;
+}
+
+.content-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: transparent;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 30px auto;
+    max-width: 900px;
+    flex-wrap: wrap;
+}
+
+/* OBECNÉ TEXTY */
+.text-container h1 {
+    font-size: 3rem;
+}
+
+.text {
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+}
+
+/* GALERIE */
+.image-gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.image-container {
+    display: flex;
+    gap: 10px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.image-container img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }
+
+/* FOTO BOX */
+.photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+}
+.photo-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    transition: transform 0.4s ease-in-out;
+}
+.photo-container img:hover {
+    transform: scale(1.5);
+}
+
+/* CENÍK */
+.boxes {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  padding: 0 20px; /* Přidá trochu odsazení na menších zařízeních */
+}
+
+.box-link {
+  text-decoration: none;
+  color: inherit;
+  flex: 1 1 300px; /* Flexibilní základní šířka pro lepší zalamování */
+  max-width: 300px;
+}
+
+.box {
+  border: 4px solid #fe6d11;
+  padding: 40px 30px;
+  width: 100%; /* Na základě flexboxu bude box zabírat plnou šířku rodiče */
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.box h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #fe6d11;
+}
+
+.box p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.price {
+  font-size: 36px;
+  color: #fe6d11;
+}
+
+/* Responzivní úpravy */
+@media (max-width: 960px) {
+  .boxes {
+    gap: 30px;
+  }
+
+  .box h2 {
+    font-size: 28px;
+  }
+
+  .box p {
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .boxes {
+    gap: 20px;
+  }
+
+  .box-link {
+    max-width: 100%;
+  }
+
+  .box {
+    padding: 30px 20px;
+  }
+
+  .box h2 {
+    font-size: 24px;
+  }
+
+  .box p {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 28px;
+  }
+}
+
+/* FIX FOOTER */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.rounded-button {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 2px solid white;
+    border-radius: 25px;
+    background-color: transparent;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.rounded-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* SEKCE GALERIE */
+.section-gallery {
+    background-color: #000;
+    padding: 60px 20px;
+    color: white;
+}
+
+.section-gallery h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: white;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.large-image {
+    flex: 1 1 50%;
+    max-width: 40%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.small-image {
+    flex: 1 1 22%;
+    max-width: 30%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.small-image:hover {
+    transform: scale(0.97);
+}
+
+.text-box {
+    flex: 1 1 22%;
+    background-color: #fe6d11;
+    padding: 20px;
+    color: #222;
+    border-radius: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .plan {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p, .email {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .center-nav {
+        gap: 30px;
+    }
+
+    .gradient-text {
+        font-size: 2.5rem;
+    }
+}
+.stats {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.stat h2 {
+  font-size: 48px;
+  margin: 0;
+  color: #ff6600;
+  transition: all 0.3s ease;
+}
+
+.stat p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: white;
+}
+/* Animované menu */
+.menu-toggle {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1100;
+  color: white;
+}
+
+.full-menu {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fe6d11;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: top 0.6s ease-in-out;
+  z-index: 1050;
+}
+
+.full-menu.open {
+  top: 0;
+}
+
+.full-menu .close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+.full-menu .close-btn img {
+  width: 50px;
+  height: auto;
+}
+
+.menu-content h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 90px; /* větší velikost */
+  font-weight: 400;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+.menu-content h1 a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-content h1 a:hover {
+  color: white;
+}
+/* Animované otazky */
+.faq-container {
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    padding: 0 20px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #444;
+    padding: 10px 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    flex-wrap: wrap; /* Zajistí zalomení na malých displejích */
+}
+
+.faq-question span {
+    font-size: 18px;
+    color: white;
+    flex: 1 1 auto;
+}
+
+.faq-toggle {
+    background: #fe6d11;
+    border: none;
+    color: white;
+    font-size: 22px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.faq-toggle:hover {
+    transform: scale(1.1);
+}
+
+.faq-answer {
+    display: none;
+    font-size: 16px;
+    color: #ccc;
+    padding: 10px 0;
+    transition: max-height 0.3s ease-out;
+}
+
+/* Responzivní úpravy */
+@media (max-width: 768px) {
+    .faq-question span {
+        font-size: 16px;
+    }
+
+    .faq-toggle {
+        font-size: 20px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .faq-answer {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-container {
+        padding: 0 10px;
+    }
+
+    .faq-question span {
+        font-size: 15px;
+    }
+
+    .faq-toggle {
+        font-size: 18px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+    }
+}
+
+/* PLÁN 2025 sekce */
+/* Každá sekce zabere celou obrazovku */
+.contact-section,
+.video-section {
+    height: 100vh; /* Celá výška obrazovky */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* PLÁN 2025 */
+.contact-section {
+    background-color: #fe6d11;
+    color: black;
+}
+
+/* Video sekce */
+.video-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Video jako pozadí */
+.intro-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+/* Overlay pro ztmavení videa */
+.video-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+/* Textová sekce nad videem */
+.video-content {
+    position: relative;
+    color: #fe6d11;
+    font-family: 'Bebas Neue', sans-serif;
+    z-index: 1;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.video-content h2 {
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.video-content p {
+    font-size: 22px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+.contact-section {
+    background-color: #fe6d11;
+    padding: 100px 20px;
+    text-align: center;
+    color: black;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.contact-content h1 {
+    font-size: 160px;
+    font-weight: 400;
+    margin: 0;
+    letter-spacing: 6px;
+    line-height: 1.1;
+}
+
+.contact-content p {
+    font-size: 32px;
+    font-weight: 300;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responzivní úpravy */
+@media (max-width: 1200px) {
+    .contact-content h1 {
+        font-size: 100px;
+    }
+
+    .contact-content p {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-content h1 {
+        font-size: 70px;
+        letter-spacing: 3px;
+    }
+
+    .contact-content p {
+        font-size: 22px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-content h1 {
+        font-size: 50px;
+        letter-spacing: 2px;
+    }
+
+    .contact-content p {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+
+    .contact-section {
+        padding: 60px 10px;
+    }
+}
+.pricing-faq-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* svislé vycentrování */
+  align-items: center;     /* vodorovné vycentrování */
+  padding: 60px 20px;
+  background-color: black;
+}
+
+.pricing-faq-section .boxes {
+  margin-bottom: 40px;
+}
+
+
+
+    </style>
+    
+    
+    <script>
+       const secretCode = "1234"; // <-- Nastav si svůj kód
+  const userInput = prompt("Zadejte přístupový kód:");
+
+  if (!userInput || userInput !== secretCode) {
+    alert("Nesprávný nebo žádný kód!");
+    window.history.back(); // Vrátí uživatele na předchozí stránku
+  }
+        function toggleMenu() {
+            const menu = document.querySelector('.menu-container');
+            const button = document.querySelector('.menu-button');
+            const items = document.querySelectorAll('.menu-item');
+
+            // Přepnutí aktivního stavu menu
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                button.classList.remove('active'); // Zrušení aktivace flipu textu
+                
+                // Skrytí odkazů při zavření
+                items.forEach((item) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scaleX(0)'; // Návrat k nataženému stavu z obou stran
+                });
+            } else {
+                menu.classList.add('active');
+                button.classList.add('active'); // Aktivace flipu textu
+
+                // Postupné zobrazení odkazů s efektem natažení
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scaleX(1)'; // Návrat do normální velikosti textu
+                    }, index * 400); // Zpoždění mezi odkazy
+                });
+            }
+        }
+        function toggleMenu() {
+  const menu = document.getElementById('fullMenu');
+  menu.classList.toggle('open');
+}
+    </script>
+     <script>
+        window.addEventListener('DOMContentLoaded', function () {
+          const portfolioLink = document.getElementById('portfolio-link');
+          portfolioLink.addEventListener('click', function (e) {
+            e.preventDefault(); // Zamezí přímému přesměrování
+            const accessCode = prompt("Zadejte přístupový kód pro Portfolio:");
+            const correctCode = "1234"; // <-- Změň si podle potřeby
+      
+            if (accessCode === correctCode) {
+              window.location.href = this.href;
+            } else {
+              alert("Nesprávný kód. Přístup odepřen.");
+            }
+          });
+        });
+      </script>
+    
+    
+</head>
+<body>
+    <header>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <div class="full-menu" id="fullMenu">
+          <button class="close-btn" onclick="toggleMenu()">
+            
+          </button>  
+        
+          <div class="menu-content">
+            <h1><a href="projekt1_index.html">HLAVNÍ</a></h1>
+            <h1><a href="galerie.html">PORTFOLIO</a></h1>
+            <h1><a href="kurz.html">SNOWBOARDING</a></h1>
+            <h1><a href="Board.html">OVERVIEW</a></h1>
+          </div>
+        </div>
+    
+    </header>
+
+    <div class="gradient-section">
+        <div class="gradient-text">SNOWBOARDING</div>
+    </div>
+
+    <section class="contact-section">
+        <div class="contact-content">
+            <h1>Co nabízím?</h1>
+            <p>
+                Nabízím dvouhodinové soukromé lekce snowboardingu pro jednotlivce i malé skupiny – od základů až po pokročilé ježdění. Učím s důrazem na techniku, bezpečnost a pohodovou atmosféru na svahu.
+            </p>
+            <div class="circle-button" onclick="openPanel('contact')"></div>
+        </div>
+    </section>
+    
+    <!-- Video sekce pod kontaktem -->
+    
+    
+
+    <!-- Úvodní video -->
+    <div class="video-section">
+        <video class="intro-video" muted autoplay loop playsinline>
+            <source src="BannerHL.mp4" type="video/mp4">
+            Váš prohlížeč nepodporuje video tag.
+        </video>
+        
+        <div class="video-overlay"></div>
+        
+        <!-- TEXT PŘES VIDEO -->
+        <div class="video-content">
+            <section class="stats">
+                <div class="container">
+                  <div class="stats-grid">
+                    <div class="stat">
+                      <h2 data-target="300">0</h2>
+                      <p>odučených hodin</p>
+                    </div>
+                    <div class="stat">
+                      <h2 data-target="100">0</h2>
+                      <p>dětí</p>
+                    </div>
+                    <div class="stat">
+                      <h2 data-target="4">0</h2>
+                      <p>lyžařské kurzy</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </div>
+    </div>
+    
+        <br>
+        <br>
+        <br>
+          
+
+        <section class="pricing-faq-section">
+            <div class="boxes">
+              <a href="form.html" class="box-link">
+                <div class="box">
+                  <h2>Individuální lekce</h2>
+                  <p>2 hodiny výuky jeden na jednoho. Ideální pro začátečníky i pokročilé.</p>
+                  <div class="price">1000 CZK</div>
+                </div>
+              </a>
+          
+              <a href="form.html" class="box-link">
+                <div class="box">
+                  <h2>Skupinová lekce</h2>
+                  <p>2 hodiny výuky pro 2–4 osoby. Zábava i pokrok ve skupině.</p>
+                  <div class="price">750 CZK / osoba</div>
+                </div>
+              </a>
+          
+              <a href="formSkoly.html" class="box-link">
+                <div class="box">
+                  <h2>Školní kurzy</h2>
+                  <p>Individuální nabídka pro školy a větší skupiny. Dle domluvy.</p>
+                  <div class="price">na dotaz</div>
+                </div>
+              </a>
+            </div>
+          
+            <div class="faq-container">
+              <div class="faq-item">
+                <div class="faq-question">
+                  <span>Mohu si domluvit soukromou lekci ve skupině?</span>
+                  <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">
+                  <p>Ano! Soukromé lekce mohou být individuální nebo skupinové – ideální pro rodinu nebo přátele...</p>
+                </div>
+              </div>
+          
+              <div class="faq-item">
+                <div class="faq-question">
+                  <span>Může se mnou na lekci přijít doprovod?</span>
+                  <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">
+                  <p>Ano, doprovod je možný! Pokud se jedná o neaktivního doprovod (např. rodič sledující dítě)...</p>
+                </div>
+              </div>
+          
+              <div class="faq-item">
+                <div class="faq-question">
+                  <span>Co si mám vzít s sebou na lekci?</span>
+                  <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">
+                  <p>Doporučujeme přinést vlastní snowboardové vybavení, tedy prkno, boty, helmu a brýle...</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+        
+        
+        
+
+     
+          
+        
+        
+        
+                <!-- Fotka před footerem 
+    <div class="photo-container">
+        <img src="jakVybrat.png" alt="Moje Fotka">
+    </div>-->
+
+        <!-- Sekce 4 -->
+        <div class="section-gallery">
+            <div class="gallery-container">
+                <img src="lyze1.JPG" alt="Snowboard 1" class="large-image">
+                <div class="text-box">
+                    <p>Naše první lekce snowboardingu začala slunečným ránem...</p>
+                </div>
+                <img src="lyze2.JPG" alt="Snowboard 2" class="small-image">
+                <img src="lyze3.JPG" alt="Snowboard 3" class="small-image">
+                <div class="text-box">
+                    <p>Trénujeme stabilitu a správný postoj na svahu...</p>
+                </div>
+                <img src="lyze4.jpg" alt="Snowboard 4" class="large-image">
+            </div>
+        </div>
+        
+        
+        
+        
+   
+        
+        
+    </main>
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com" target="_blank" class="rounded-button">Instagram</a>
+            <a href="https://www.youtube.com" target="_blank" class="rounded-button">YouTube</a>
+            <a href="https://www.tiktok.com" target="_blank" class="rounded-button">TikTok</a>
+        </div>
+    </footer>
+</div>
+<script>
+    window.addEventListener("scroll", () => {
+        const hiddenContent = document.querySelector(".hidden-content");
+        const gradientSectionHeight = document.querySelector(".gradient-section").getBoundingClientRect().height;
+
+        if (window.scrollY > gradientSectionHeight * 0.5) {
+            hiddenContent.classList.add("visible");
+        } else {
+            hiddenContent.classList.remove("visible");
+        }
+    });
+
+    function handleScroll() {
+        const sections = document.querySelectorAll(".section");
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3) {
+                section.classList.add("active");
+            } else {
+                section.classList.remove("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", handleScroll);
+</script>
+<script>
+    const counters = document.querySelectorAll('.stat h2');
+    let hasAnimated = false;
+  
+    const animateCount = (el, target) => {
+      let count = 0;
+      const step = Math.ceil(target / 100);
+      const duration = 1500;
+      const interval = duration / (target / step);
+  
+      const counter = setInterval(() => {
+        count += step;
+        if (count >= target) {
+          el.textContent = target + (target >= 100 ? '+' : '');
+          clearInterval(counter);
+        } else {
+          el.textContent = count;
+        }
+      }, interval);
+    };
+  
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasAnimated) {
+          counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            animateCount(counter, target);
+          });
+          hasAnimated = true;
+          observer.disconnect(); // odpojí pozorování po prvním spuštění
+        }
+      });
+    }, { threshold: 0.5 });
+  
+    const statsSection = document.querySelector('.stats');
+    observer.observe(statsSection);
+    
+        document.querySelectorAll(".faq-toggle").forEach(button => {
+            button.addEventListener("click", () => {
+                const answer = button.parentElement.nextElementSibling;
+                answer.style.display = answer.style.display === "block" ? "none" : "block";
+                button.textContent = answer.style.display === "block" ? "−" : "+";
+            });
+        });
+        
+    
+  </script>
+  
+    </body>
+    </html>

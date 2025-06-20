@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FILIP LIŠKA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    body {
+      background: black;
+      color: #fe6d11;
+      position: relative;
+    }
+
+    .menu-toggle {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1001;
+  color: white;
+}
+
+
+    .full-menu {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fe6d11;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: top 0.6s ease-in-out;
+      z-index: 1000;
+    }
+
+    .full-menu.open {
+      top: 0;
+    }
+
+    .full-menu .close-btn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      background: none;
+      border: none;
+      font-size: 36px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-content h1 {
+      font-size: 80px;
+      margin: 20px 0;
+    }
+
+    .menu-content h1 a {
+      color: black;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .menu-content h1 a:hover {
+      color: white;
+    }
+
+    .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    .title h1 {
+      font-size: 12em;
+      line-height: 0.9;
+      white-space: nowrap;
+      overflow-wrap: normal;
+    }
+
+    .image-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: none;
+    }
+
+    .image-wrapper img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .title h1 {
+        font-size: 8em;
+      }
+      .menu-content h1 {
+        font-size: 60px;
+      }
+      .image-wrapper {
+        width: 80%;
+        height: auto;
+        max-height: 350px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .title h1 {
+        font-size: 5em;
+      }
+      .menu-content h1 {
+        font-size: 50px;
+      }
+      .image-wrapper {
+        width: 90%;
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title h1 {
+        font-size: 3.5em;
+        white-space: normal; /* umožní zalamování textu na malých obrazovkách */
+      }
+      .menu-toggle {
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        
+      }
+      .full-menu .close-btn {
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+      }
+      .menu-content h1 {
+        font-size: 30px;
+      }
+      .image-wrapper {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- === MENU === -->
+  <div class="menu-toggle" onclick="document.getElementById('fullMenu').classList.toggle('open')">☰</div>
+  <div class="full-menu" id="fullMenu">
+
+    <div class="menu-content">
+      <h1><a href="projekt1_index.html">HLAVNÍ</a></h1>
+      <h1><a href="galerie.html">PORTFOLIO</a></h1>
+      <h1><a href="kurz.html">SNOWBOARDING</a></h1>
+      <h1><a href="Board.html">OVERVIEW</a></h1>
+    </div>
+  </div>
+
+  <!-- === TITLE s efektem === -->
+  <div class="title">
+    <h1 id="name-title"></h1>
+  </div>
+
+  <div class="image-wrapper" id="slider">
+    <img src="ja3.JPG" class="active" />
+    <img src="ja1.jpg" />
+    <img src="ja2.jpg" />
+    <img src="ja4.jpg" />
+  </div>
+
+  <!-- === SCRIPT === -->
+  <script>
+    // === SLIDER ===
+    const images = document.querySelectorAll('#slider img');
+    let current = 0;
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 3000);
+
+    // === ANIMACE TEXTU ===
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZČĚŠŘŽÝÁÍÉŮÚabcdefghijklmnopqrstuvwxyzčěšřžýáíéůú0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?";
+    const targetText = "FILIP LIŠKA";
+    const nameTitle = document.getElementById("name-title");
+
+    function shuffleLetter(index, duration = 500) {
+      return new Promise(resolve => {
+        let frame = 0;
+        const maxFrames = Math.floor(duration / 50);
+        const interval = setInterval(() => {
+          let display = "";
+          for (let i = 0; i < targetText.length; i++) {
+            if (i < index) {
+              display += targetText[i];
+            } else if (i === index) {
+              display += letters[Math.floor(Math.random() * letters.length)];
+            } else {
+              display += " ";
+            }
+          }
+          nameTitle.innerText = display;
+          frame++;
+          if (frame >= maxFrames) {
+            clearInterval(interval);
+            resolve();
+          }
+        }, 50);
+      });
+    }
+
+    async function startEffect() {
+      for (let i = 0; i < targetText.length; i++) {
+        if (targetText[i] === " ") {
+          nameTitle.innerText = nameTitle.innerText.slice(0, i) + " ";
+          continue;
+        }
+        await shuffleLetter(i, 500);
+      }
+      nameTitle.innerText = targetText;
+    }
+
+    startEffect();
+  </script>
+</body>
+</html>
