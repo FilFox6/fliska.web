@@ -9,13 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
-  /* === ZÁKLADNÍ NASTAVENÍ === */
+/* ==================================================
+   ZÁKLADNÍ NASTAVENÍ
+================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: Arial, sans-serif;
   background-color: black;
@@ -26,7 +27,9 @@ body {
   background-size: 50%, 50%;
 }
 
-/* === NAVIGACE === */
+/* ==================================================
+   NAVIGACE
+================================================== */
 .navbar {
   display: flex;
   align-items: center;
@@ -36,7 +39,6 @@ body {
   position: relative;
   z-index: 1000;
 }
-
 .center-nav {
   position: absolute;
   left: 50%;
@@ -44,7 +46,6 @@ body {
   display: flex;
   gap: 70px;
 }
-
 .center-nav a {
   color: white;
   text-decoration: none;
@@ -52,9 +53,8 @@ body {
   padding-bottom: 5px;
   position: relative;
 }
-
 .center-nav a::after {
-  content: "";
+  content: ""; 
   position: absolute;
   bottom: 0;
   left: 0;
@@ -63,22 +63,21 @@ body {
   background-color: #fe6d11;
   transition: width 0.4s ease;
 }
-
 .center-nav a:hover::after {
   width: 100%;
 }
-
 .logo img {
   width: 80px;
   height: auto;
   transition: transform 0.4s ease-in-out;
 }
-
 .logo img:hover {
   transform: scale(1.1);
 }
 
-/* === ÚVODNÍ HLAVIČKA === */
+/* ==================================================
+   ÚVODNÍ HLAVIČKA
+================================================== */
 .gradient-section {
   position: relative;
   display: flex;
@@ -86,7 +85,6 @@ body {
   align-items: center;
   height: 100vh;
 }
-
 .gradient-text {
   font-size: 12rem;
   background-color: #fe6d11;
@@ -98,30 +96,21 @@ body {
   animation: fadeIn 1s ease-out forwards;
 }
 
-/* === ANIMACE === */
+/* ==================================================
+   ANIMACE
+================================================== */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px) }
+  to { opacity: 1; transform: translateY(0) }
 }
-
 @keyframes fadeInBoard {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px) }
+  to { opacity: 1; transform: translateY(0) }
 }
 
-/* === KONTAKT SEKCE === */
+/* ==================================================
+   KONTAKT SEKCE
+================================================== */
 .contact-section {
   background-color: #fe6d11;
   padding: 100px 20px;
@@ -129,7 +118,6 @@ body {
   color: black;
   font-family: 'Bebas Neue', sans-serif;
 }
-
 .contact-content h1 {
   font-size: 140px;
   font-weight: 400;
@@ -137,14 +125,12 @@ body {
   letter-spacing: 5px;
   line-height: 1.1;
 }
-
 .contact-content p {
   font-size: 28px;
   font-weight: 300;
   margin-top: 20px;
   letter-spacing: 1px;
 }
-
 .circle-button {
   margin: 40px auto 0;
   width: 60px;
@@ -159,12 +145,13 @@ body {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-
 .circle-button:hover {
   transform: scale(1.1);
 }
 
-/* === SLIDE PANELY === */
+/* ==================================================
+   SLIDE PANELY
+================================================== */
 .side-panel {
   position: fixed;
   top: 0;
@@ -179,25 +166,20 @@ body {
   z-index: 1000;
   overflow-y: auto;
 }
-
 .side-panel.active {
   right: 0;
 }
-
 .panel-content {
   padding: 40px 30px;
 }
-
 .panel-content h2 {
   font-size: 48px;
   margin-bottom: 20px;
 }
-
 .panel-content p {
   font-size: 18px;
   line-height: 1.6;
 }
-
 .close-btn {
   position: absolute;
   top: 20px;
@@ -213,7 +195,9 @@ body {
   line-height: 40px;
 }
 
-/* === MENU FULLSCREEN === */
+/* ==================================================
+   MENU FULLSCREEN
+================================================== */
 .menu-toggle {
   position: absolute;
   top: 20px;
@@ -223,7 +207,6 @@ body {
   z-index: 1100;
   color: white;
 }
-
 .full-menu {
   position: fixed;
   top: -100%;
@@ -239,11 +222,9 @@ body {
   transition: top 0.6s ease-in-out;
   z-index: 1050;
 }
-
 .full-menu.open {
   top: 0;
 }
-
 .full-menu .close-btn {
   position: absolute;
   top: 30px;
@@ -253,12 +234,10 @@ body {
   cursor: pointer;
   z-index: 1101;
 }
-
 .full-menu .close-btn img {
   width: 50px;
   height: auto;
 }
-
 .menu-content h1 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 90px;
@@ -266,18 +245,18 @@ body {
   margin: 20px 0;
   text-transform: uppercase;
 }
-
 .menu-content h1 a {
   color: black;
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
 .menu-content h1 a:hover {
   color: white;
 }
 
-/* === FOOTER === */
+/* ==================================================
+   FOOTER
+================================================== */
 footer {
   position: fixed;
   bottom: 0;
@@ -286,13 +265,11 @@ footer {
   text-align: center;
   padding: 10px 20px;
 }
-
 .social-links {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
-
 .rounded-button {
   display: inline-block;
   padding: 5px 15px;
@@ -306,13 +283,14 @@ footer {
   cursor: pointer;
   transition: 0.3s ease;
 }
-
 .rounded-button:hover {
   background-color: white;
   color: black;
 }
 
-/* === OBSAH BOARD === */
+/* ==================================================
+   OBSAH BOARD
+================================================== */
 .board-content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -324,44 +302,39 @@ footer {
   animation: fadeInBoard 1.5s ease 0.8s forwards;
 }
 
-/* === RESPONSIVITA === */
+/* ==================================================
+   RESPONSIVITA
+================================================== */
 @media (max-width: 768px) {
   .gradient-text {
-    font-size: 4rem;
+    font-size: 2rem;
     text-align: center;
     letter-spacing: 2px;
     padding: 0 20px;
   }
-
   .contact-content h1 {
     font-size: 52px;
     letter-spacing: 2px;
     line-height: 1.2;
   }
-
   .contact-content p {
     font-size: 18px;
     padding: 0 10px;
   }
-
   .circle-button {
     width: 50px;
     height: 50px;
     font-size: 20px;
   }
-
   .panel-content h2 {
     font-size: 32px;
   }
-
   .panel-content p {
     font-size: 16px;
   }
-
   .menu-content h1 {
     font-size: 48px;
   }
-
   .center-nav {
     position: static;
     transform: none;
@@ -370,18 +343,19 @@ footer {
     margin-top: 10px;
     align-items: center;
   }
-
   .navbar {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px 20px;
   }
-
   .side-panel {
     max-width: 100%;
   }
-
 }
+
+/* ==================================================
+   REGISTRAČNÍ BUTTON
+================================================== */
 .register-button {
   display: inline-block;
   padding: 12px 20px;

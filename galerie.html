@@ -8,197 +8,151 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <style>
+/* ===========================
+  ZÁKLADNÍ STYL
+=========================== */
 body {
-    overflow-x: hidden;
-    background-color: #000;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  background-color: #000;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Navbar */
+/* ===========================
+  NAVBAR
+=========================== */
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #000;
-    padding: 10px 40px;
-    position: relative;
-    z-index: 1000;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  padding: 10px 40px;
+  position: relative;
+  z-index: 1000;
+  flex-wrap: wrap;
 }
 
 .logo img {
-    width: 80px;
-    height: auto;
-    transition: transform 0.4s ease-in-out;
+  width: 80px;
+  height: auto;
+  transition: transform 0.4s ease-in-out;
 }
 
 .logo img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .center-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 70px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 70px;
 }
 
 .center-nav a {
-    position: relative;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
-    padding-bottom: 5px;
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  padding-bottom: 5px;
 }
 
 .center-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 0;
-    background-color: #fe6d11;
-    transition: width 0.4s ease;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #fe6d11;
+  transition: width 0.4s ease;
 }
 
 .center-nav a:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
-/* Gradient sekce */
+/* ===========================
+  GRADIENT SEKCIA
+=========================== */
 .gradient-section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
-
 
 .gradient-text {
-    font-size: 12rem;
-    background-color: #fe6d11;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 4px;
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    
-    /* VYHOĎ `position: absolute` */
+  font-size: 12rem;
+  background-color: #fe6d11;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 4px;
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
-
-
-
-/* Footer */
+/* ===========================
+  FOOTER
+=========================== */
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
 }
 
 .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 .rounded-button {
-    display: inline-block;
-    padding: 5px 15px;
-    border: 2px solid white;
-    border-radius: 25px;
-    background-color: transparent;
-    color: white;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  padding: 5px 15px;
+  border: 2px solid white;
+  border-radius: 25px;
+  background-color: transparent;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .rounded-button:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
-/* TABLET */
-@media (max-width: 992px) {
-    .gradient-text {
-        font-size: 3rem;
-        margin-top: -120px;
-    }
-
-    .center-nav {
-        gap: 40px;
-    }
-}
-
-/* MOBIL */
-@media (max-width: 576px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 10px 20px;
-    }
-
-    .center-nav {
-        position: static;
-        flex-direction: column;
-        gap: 20px;
-        transform: none;
-        margin-top: 10px;
-        align-items: flex-start;
-    }
-
-    .logo img {
-        width: 60px;
-    }
-
-    .gradient-text {
-        font-size: 2rem;
-        margin-top: -80px;
-    }
-
-    footer {
-        font-size: 12px;
-        padding: 8px 15px;
-    }
-
-    .rounded-button {
-        padding: 4px 12px;
-        font-size: 10px;
-    }
-}
-/*menu*/
+/* ===========================
+  MENU TOGGLE
+=========================== */
 .menu-toggle {
   position: absolute;
   top: 20px;
@@ -246,7 +200,7 @@ footer {
 
 .menu-content h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 90px; /* větší velikost */
+  font-size: 90px;
   font-weight: 400;
   margin: 20px 0;
   text-transform: uppercase;
@@ -261,7 +215,10 @@ footer {
 .menu-content h1 a:hover {
   color: white;
 }
-/* Boxy */
+
+/* ===========================
+  VIDEO KNIHOVNA
+=========================== */
 .video-library {
   background-color: black;
   padding: 60px 40px;
@@ -271,12 +228,11 @@ footer {
   border-bottom: 5px solid #fe6d11;
   color: white;
   text-align: center;
-  height: 100vh; /* Tohle udělá fullscreen výšku */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 
 .video-library h2 {
   font-family: 'Bebas Neue', sans-serif;
@@ -289,10 +245,8 @@ footer {
   overflow-x: auto;
   white-space: nowrap;
   scroll-behavior: smooth;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto 0;
 }
-
 
 .video-track {
   display: inline-flex;
@@ -318,6 +272,76 @@ footer {
   color: #ccc;
 }
 
+/* ===========================
+  TABLET
+=========================== */
+@media (max-width: 992px) {
+  .gradient-text {
+    font-size: 3rem;
+    margin-top: -120px;
+  }
+
+  .center-nav {
+    gap: 40px;
+  }
+}
+
+/* ===========================
+  MOBIL
+=========================== */
+@media (max-width: 576px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .center-nav {
+    position: static;
+    flex-direction: column;
+    gap: 20px;
+    transform: none;
+    margin-top: 10px;
+    align-items: flex-start;
+  }
+
+  .logo img {
+    width: 60px;
+  }
+
+  .gradient-text {
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 0 20px;
+  }
+
+  footer {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+
+  .rounded-button {
+    padding: 4px 12px;
+    font-size: 10px;
+  }
+
+  .menu-content h1 {
+    font-size: 48px;
+  }
+
+  .video-library {
+    padding: 40px 20px;
+  }
+
+  .video-item {
+    width: 260px;
+  }
+
+  .video-item iframe {
+    height: 150px;
+  }
+}
 
 
     </style>
