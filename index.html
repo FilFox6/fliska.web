@@ -8,11 +8,8 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.ico" />
-
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/Geometrická hlava lišky.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/Geometrická hlava lišky.png" />
 
   <style>
     * {
@@ -21,28 +18,23 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    html, body {
       height: 100%;
-      overflow: hidden;
       font-family: 'Bebas Neue', sans-serif;
-    }
-
-    body {
-      background: black;
+      background: url('ja3.JPG') no-repeat center center fixed;
+      background-size: cover;
       color: #fe6d11;
-      position: relative;
     }
 
     .menu-toggle {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 32px;
-  cursor: pointer;
-  z-index: 1001;
-  color: white;
-}
-
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 32px;
+      cursor: pointer;
+      z-index: 1001;
+      color: black;
+    }
 
     .full-menu {
       position: fixed;
@@ -97,7 +89,6 @@
       transform: translate(-50%, -50%);
       text-align: center;
       z-index: 2;
-      pointer-events: none;
       width: 100%;
       padding: 0 10px;
     }
@@ -106,48 +97,24 @@
       font-size: 12em;
       line-height: 0.9;
       white-space: nowrap;
-      overflow-wrap: normal;
+      animation: fadeIn 1s ease-out forwards;
     }
+    @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  } to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .image-wrapper {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 400px;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .image-wrapper img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: none;
-    }
-
-    .image-wrapper img.active {
-      opacity: 1;
-      z-index: 2;
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 1200px) {
       .title h1 {
         font-size: 8em;
       }
       .menu-content h1 {
         font-size: 60px;
-      }
-      .image-wrapper {
-        width: 80%;
-        height: auto;
-        max-height: 350px;
       }
     }
 
@@ -158,22 +125,17 @@
       .menu-content h1 {
         font-size: 50px;
       }
-      .image-wrapper {
-        width: 90%;
-        height: 250px;
-      }
     }
 
     @media (max-width: 480px) {
       .title h1 {
         font-size: 3.5em;
-        white-space: normal; /* umožní zalamování textu na malých obrazovkách */
+        white-space: normal;
       }
       .menu-toggle {
         top: 15px;
         right: 20px;
         font-size: 28px;
-        
       }
       .full-menu .close-btn {
         top: 15px;
@@ -183,11 +145,8 @@
       .menu-content h1 {
         font-size: 48px;
       }
-      .image-wrapper {
-        width: 100%;
-        height: 180px;
-      }
     }
+    
   </style>
 </head>
 <body>
@@ -195,80 +154,18 @@
   <!-- === MENU === -->
   <div class="menu-toggle" onclick="document.getElementById('fullMenu').classList.toggle('open')">☰</div>
   <div class="full-menu" id="fullMenu">
-
     <div class="menu-content">
-      <h1><a href="projekt1_index.html">HLAVNÍ</a></h1>
+      <h1><a href="index.html">HLAVNÍ</a></h1>
       <h1><a href="galerie.html">PORTFOLIO</a></h1>
       <h1><a href="kurz.html">SNOWBOARDING</a></h1>
       <h1><a href="Board.html">OVERVIEW</a></h1>
     </div>
   </div>
 
-  <!-- === TITLE s efektem === -->
+  <!-- === TITLE === -->
   <div class="title">
-    <h1 id="name-title"></h1>
+    <h1>FILIP LIŠKA</h1>
   </div>
 
-  <div class="image-wrapper" id="slider">
-    <img src="ja3.JPG" class="active" />
-    <img src="ja1.jpg" />
-    <img src="ja2.jpg" />
-    <img src="ja4.jpg" />
-  </div>
-
-  <!-- === SCRIPT === -->
-  <script>
-    // === SLIDER ===
-    const images = document.querySelectorAll('#slider img');
-    let current = 0;
-    setInterval(() => {
-      images[current].classList.remove('active');
-      current = (current + 1) % images.length;
-      images[current].classList.add('active');
-    }, 3000);
-
-    // === ANIMACE TEXTU ===
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZČĚŠŘŽÝÁÍÉŮÚabcdefghijklmnopqrstuvwxyzčěšřžýáíéůú0123456789!@#$%^&*()_+-=[]{}|;:',.<>/?";
-    const targetText = "FILIP LIŠKA";
-    const nameTitle = document.getElementById("name-title");
-
-    function shuffleLetter(index, duration = 500) {
-      return new Promise(resolve => {
-        let frame = 0;
-        const maxFrames = Math.floor(duration / 50);
-        const interval = setInterval(() => {
-          let display = "";
-          for (let i = 0; i < targetText.length; i++) {
-            if (i < index) {
-              display += targetText[i];
-            } else if (i === index) {
-              display += letters[Math.floor(Math.random() * letters.length)];
-            } else {
-              display += " ";
-            }
-          }
-          nameTitle.innerText = display;
-          frame++;
-          if (frame >= maxFrames) {
-            clearInterval(interval);
-            resolve();
-          }
-        }, 50);
-      });
-    }
-
-    async function startEffect() {
-      for (let i = 0; i < targetText.length; i++) {
-        if (targetText[i] === " ") {
-          nameTitle.innerText = nameTitle.innerText.slice(0, i) + " ";
-          continue;
-        }
-        await shuffleLetter(i, 500);
-      }
-      nameTitle.innerText = targetText;
-    }
-
-    startEffect();
-  </script>
 </body>
 </html>
