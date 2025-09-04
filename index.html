@@ -34,7 +34,7 @@
   font-size: 32px;
   cursor: pointer;
   z-index: 1001;
-  color: black;
+  color: white;
 }
 
 .full-menu {
@@ -51,7 +51,7 @@
   align-items: center;
   transition: top 0.6s ease-in-out;
   z-index: 1000;
-  padding: 60px 0;                  /* aby nebylo nalepené */
+  padding: 0; /* odstraníme přebytečné odsazení */
 }
 
 .full-menu.open {
@@ -69,16 +69,23 @@
   cursor: pointer;
 }
 
-/* Obalovací div pro zarovnání odkazů na střed */
+/* odkazy zpět na přesný střed */
 .menu-wrapper {
   flex: 1;
   display: flex;
-  align-items: center;   /* vertikálně na střed */
+  align-items: flex-start;   /* místo center, aby šly dolů */
+  justify-content: center;
+  padding-top: 20vh;         /* posune odkazy níž od horní části */
 }
 
+
 .menu-content h1 {
-  font-size: 80px;
-  margin: 20px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px;        /* větší text */
+  font-weight: 400;
+  margin: 25px 0;
+  text-transform: uppercase;
+  text-align: center;     /* absolutně na střed */
 }
 
 .menu-content h1 a {
@@ -91,22 +98,24 @@
   color: white;
 }
 
+/* sociální odkazy menší a níž */
 .social-links {
-  padding-bottom: 40px;
+  padding-bottom: 20px;  /* blíž spodnímu okraji */
   display: flex;
-  gap: 30px;
+  gap: 25px;
   justify-content: center;
 }
 
 .social-links a {
   color: black;
-  font-size: 36px;
+  font-size: 28px;  /* zmenšeno */
   transition: color 0.3s ease;
 }
 
 .social-links a:hover {
   color: white;
 }
+
 
 
     .title {
