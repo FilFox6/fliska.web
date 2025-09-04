@@ -206,11 +206,11 @@ body {
   font-size: 32px;
   cursor: pointer;
   z-index: 1001;
-  color: white;   /* na stránce bude bílé */
+  color: white;
   transition: color 0.3s ease;
 }
 
-/* když je menu otevřené, tlačítko bude černé */
+/* pokud je menu otevřené, tlačítko změní barvu */
 .full-menu.open ~ .menu-toggle,
 .full-menu.open + .menu-toggle {
   color: black;
@@ -226,7 +226,7 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between;   /* rozdělí obsah a social */
   align-items: center;
   transition: top 0.6s ease-in-out;
   z-index: 1000;
@@ -248,17 +248,18 @@ body {
   cursor: pointer;
 }
 
+/* odkazy zpět na přesný střed */
 .menu-wrapper {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start;   /* místo center, aby šly dolů */
   justify-content: center;
-  padding-top: 20vh;
+  padding-top: 20vh;         /* posune odkazy níž od horní části */
 }
 
 .menu-content h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 100px;
+  font-size: 100px;          /* větší text */
   font-weight: 400;
   margin: 25px 0;
   text-transform: uppercase;
@@ -275,8 +276,9 @@ body {
   color: white;
 }
 
+/* sociální odkazy menší a níž */
 .social-links {
-  padding-bottom: 20px;
+  padding-bottom: 20px;      /* blíž spodnímu okraji */
   display: flex;
   gap: 25px;
   justify-content: center;
@@ -284,7 +286,7 @@ body {
 
 .social-links a {
   color: black;
-  font-size: 28px;
+  font-size: 28px;           /* zmenšeno */
   transition: color 0.3s ease;
 }
 
@@ -292,6 +294,28 @@ body {
   color: white;
 }
 
+/* --- MOBILNÍ ÚPRAVY --- */
+@media (max-width: 768px) {
+  .full-menu {
+    justify-content: flex-start;
+    padding-top: 15vh;              /* odkazy trochu níž */
+  }
+
+  .menu-content h1 {
+    font-size: 85px;                /* ještě větší text */
+    margin: 18px 0;
+  }
+
+  .social-links {
+    margin-top: 35px;               /* odstup pod odkazy */
+    padding-bottom: 15px;           /* blíž ke spodnímu okraji */
+    gap: 30px;                      /* víc místa mezi ikonami */
+  }
+
+  .social-links a {
+    font-size: 34px;                /* zvětšené ikony */
+  }
+}
 
 /* ==================================================
    FOOTER
