@@ -1,780 +1,423 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Animace obrázků</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-    <style>
-/* ===========================
-  ZÁKLADNÍ STYL
-=========================== */
-body {
-  overflow-x: hidden;
-  background-color: #000;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ===========================
-  NAVBAR
-=========================== */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #000;
-  padding: 10px 40px;
-  position: relative;
-  z-index: 1000;
-  flex-wrap: wrap;
-}
-
-.logo img {
-  width: 80px;
-  height: auto;
-  transition: transform 0.4s ease-in-out;
-}
-
-.logo img:hover {
-  transform: scale(1.1);
-}
-
-.center-nav {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 70px;
-}
-
-.center-nav a {
-  position: relative;
-  color: white;
-  text-decoration: none;
-  font-size: 17px;
-  padding-bottom: 5px;
-}
-
-.center-nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background-color: #fe6d11;
-  transition: width 0.4s ease;
-}
-
-.center-nav a:hover::after {
-  width: 100%;
-}
-
-/* ===========================
-  GRADIENT SEKCIA
-=========================== */
-.gradient-section {
-  position: relative;
-  display: flex;
-  justify-content: center;   /* Horizontálně na střed */
-  align-items: center;       /* Vertikálně na střed */
-  height: 100vh;             /* Výška na celou obrazovku */
-  text-align: center;        /* Zarovnání textu na střed */
-  padding: 0 20px;           /* Menší mezery po stranách pro menší displeje */
-}
-
-.gradient-text {
-  font-size: 12rem; /* uprav si podle potřeby */
-  background-color: #fe6d11;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 4px;
-  text-align: center;
-  line-height: 1;
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  } to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* ===========================
-  MENU TOGGLE
-=========================== */
-.menu-toggle {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 32px;
-  cursor: pointer;
-  z-index: 1001;
-  color: white;
-  transition: color 0.3s ease;
-}
-
-/* pokud je menu otevřené, tlačítko změní barvu */
-.full-menu.open ~ .menu-toggle,
-.full-menu.open + .menu-toggle {
-  color: black;
-}
-
-.full-menu {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fe6d11;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;   /* rozdělí obsah a social */
-  align-items: center;
-  transition: top 0.6s ease-in-out;
-  z-index: 1000;
-  padding: 0;
-}
-
-.full-menu.open {
-  top: 0;
-}
-
-.full-menu .close-btn {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  background: none;
-  border: none;
-  font-size: 36px;
-  color: white;
-  cursor: pointer;
-}
-
-/* odkazy zpět na přesný střed */
-.menu-wrapper {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;   /* místo center, aby šly dolů */
-  justify-content: center;
-  padding-top: 20vh;         /* posune odkazy níž od horní části */
-}
-
-.menu-content h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 100px;          /* větší text */
-  font-weight: 400;
-  margin: 25px 0;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.menu-content h1 a {
-  color: black;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.menu-content h1 a:hover {
-  color: white;
-}
-
-/* sociální odkazy menší a níž */
-.social-links {
-  padding-bottom: 20px;      /* blíž spodnímu okraji */
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-}
-
-.social-links a {
-  color: black;
-  font-size: 28px;           /* zmenšeno */
-  transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-  color: white;
-}
-
-/* --- MOBILNÍ ÚPRAVY --- */
-@media (max-width: 768px) {
-  .full-menu {
-    justify-content: flex-start;
-    padding-top: 15vh;              /* odkazy trochu níž */
-  }
-
-  .menu-content h1 {
-    font-size: 85px;                /* ještě větší text */
-    margin: 18px 0;
-  }
-
-  .social-links {
-    margin-top: 35px;               /* odstup pod odkazy */
-    padding-bottom: 15px;           /* blíž ke spodnímu okraji */
-    gap: 30px;                      /* víc místa mezi ikonami */
-  }
-
-  .social-links a {
-    font-size: 34px;                /* zvětšené ikony */
-  }
-}
-/* ===========================
-  VIDEO KNIHOVNA
-=========================== */
-.video-library {
-  background-color: black;
-  padding: 60px 40px;
-  position: relative;
-  overflow: hidden;
-  border-top: 5px solid #fe6d11;
-  border-bottom: 5px solid #fe6d11;
-  color: white;
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.video-library h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 48px;
-  margin-bottom: 40px;
-  color: #fe6d11;
-}
-
-.video-carousel {
-  overflow-x: auto;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  margin: auto 0;
-}
-
-.video-track {
-  display: inline-flex;
-  gap: 30px;
-  padding: 10px;
-}
-
-.video-item {
-  width: 360px;
-  flex-shrink: 0;
-  display: inline-block;
-}
-
-.video-item iframe {
-  width: 100%;
-  height: 200px;
-  border-radius: 8px;
-}
-
-.video-item p {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #ccc;
-}
-
-/* ===========================
-  TABLET
-=========================== */
-@media (max-width: 992px) {
-  .gradient-text {
-    font-size: 3rem;
-    margin-top: -120px;
-  }
-
-  .center-nav {
-    gap: 40px;
-  }
-}
-
-/* ===========================
-  MOBIL
-=========================== */
-@media (max-width: 576px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 20px;
-  }
-
-  .center-nav {
-    position: static;
-    flex-direction: column;
-    gap: 20px;
-    transform: none;
-    margin-top: 10px;
-    align-items: flex-start;
-  }
-
-  .logo img {
-    width: 60px;
-  }
-
-  .gradient-text {
-    font-size: 2rem;
-    text-align: center;
-    padding: 0 20px;
-    padding-top: 120px;
-  }
-
-  footer {
-    font-size: 12px;
-    padding: 8px 15px;
-  }
-
-  .rounded-button {
-    padding: 4px 12px;
-    font-size: 10px;
-  }
-
-  .menu-content h1 {
-    font-size: 48px;
-  }
-
-  .video-library {
-    padding: 40px 20px;
-  }
-
-  .video-item {
-    width: 260px;
-  }
-
-  .video-item iframe {
-    height: 150px;
-  }
-}
-/* ===========================
-  PORTFOLIO SEKCIA
-=========================== */
-.portfolio-library {
-  background-color: black;
-  padding: 60px 40px;
-  position: relative;
-  overflow: hidden;
-  border-top: 5px solid #fe6d11;
-  border-bottom: 5px solid #fe6d11;
-  color: white;
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.portfolio-library h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 48px;
-  margin-bottom: 40px;
-  color: #fe6d11;
-}
-
-.portfolio-carousel {
-  overflow-x: auto;
-  white-space: nowrap;
-  scroll-behavior: smooth;
-  margin: auto 0;
-}
-
-.portfolio-track {
-  display: inline-flex;
-  gap: 30px;
-  padding: 10px;
-}
-
-.portfolio-item {
-  width: 360px;
-  flex-shrink: 0;
-  display: inline-block;
-  background: #111;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.portfolio-item:hover {
-  transform: translateY(-5px);
-}
-
-.portfolio-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.portfolio-item p {
-  margin: 15px 0;
-  font-size: 16px;
-  color: #ccc;
-}
-/* ===========================
-  ACCORDION
-=========================== */
-.accordion {
-  border-top: 5px solid #fe6d11;
-  border-bottom: 5px solid #fe6d11;
-}
-
-.accordion-item {
-  border-bottom: 3px solid #111;
-}
-
-.accordion-header {
-  width: 100%;
-  background: #000;
-  color: #fe6d11;
-  text-align: left;
-  padding: 20px 40px;
-  font-size: 36px;
-  font-family: 'Bebas Neue', sans-serif;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.accordion-header::after {
-  content: "+";
-  font-size: 32px;
-  color: #fe6d11;
-  transition: transform 0.3s ease;
-}
-
-.accordion-item.active .accordion-header::after {
-  content: "−";
-  transform: rotate(180deg);
-}
-
-.accordion-header:hover {
-  background: #111;
-  color: #fff;
-}
-
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.6s ease, padding 0.3s ease;
-  background: #000;
-  padding: 0 40px;
-  display: flex;                /* dělá z obsahu flexbox */
-  flex-direction: column;       /* videa pod sebou */
-  align-items: center;          /* zarovná je doprostřed */
-  gap: 40px;                    /* mezera mezi videi */
-}
-
-.accordion-item.active .accordion-content {
-  max-height: 2000px; /* aby se to rozbalilo i pro víc videí */
-  padding: 40px;      /* větší okraj kolem videí */
-}
-.accordion .video-item {
-  width: 80%;           /* video nebude přes celou šířku */
-  max-width: 900px;     /* ale nepřesáhne 900px */
-  text-align: center;   /* zarovnání popisku doprostřed */
-}
-
-/* aby videa vypadala stejně jako v původní .video-library */
-.accordion .video-item iframe {
-  width: 100%;
-  height: 400px;       /* větší výška videa */
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5); /* decentní stín */
-}
-.accordion .video-item p {
-  margin-top: 10px;
-  font-size: 20px;
-  color: #fe6d11;
-  font-family: 'Bebas Neue', sans-serif;
-}
-.rounded-button {
-  display: inline-block;
-  padding: 8px 20px;
-  border: 2px solid white;
-  border-radius: 20px;
-  background-color: transparent;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.rounded-button:hover {
-  background-color: white;
-  color: black;
-  transform: scale(1.05);
-}
-/* ===========================
-  MODAL
-=========================== */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.85);
-}
-
-.modal-content {
-  background-color: #000;
-  margin: 5% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 1000px;
-  border-radius: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.close {
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-  align-self: flex-end;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.close:hover {
-  color: #fe6d11;
-}
-
-.image-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.image-gallery img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-
-
-    </style>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Kliknutí na box
-    document.querySelectorAll(".box[data-expandable='true']").forEach(box => {
-      box.addEventListener("click", function (e) {
-        e.stopPropagation();
-        expandBox(this);
-      });
-    });
-
-    // Kliknutí na zpět
-    document.querySelectorAll(".close-btn-inside").forEach(btn => {
-      btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        resetView();
-      });
-    });
-
-    // Accordion – musí být taky uvnitř DOMContentLoaded
-    document.querySelectorAll(".accordion-header").forEach(header => {
-      header.addEventListener("click", () => {
-        header.parentElement.classList.toggle("active");
-      });
-    });
-  });
-
-  function expandBox(clickedBox) {
-    // Reset stavu
-    resetView();
-
-    // Rozbalení daného boxu
-    clickedBox.classList.add("expanded");
-
-    // Skrytí ostatních
-    document.querySelectorAll(".box").forEach(box => {
-      if (box !== clickedBox) {
-        box.style.display = "none";
-      }
-    });
-  }
-
-  function resetView() {
-    // Vrácení všech boxů do výchozího stavu
-    document.querySelectorAll(".box").forEach(box => {
-      box.classList.remove("expanded");
-      box.style.display = "flex"; // obnoví zobrazení všech boxů
-    });
-  }
-
-  function toggleMenu() {
-    const menu = document.getElementById('fullMenu');
-    menu.classList.toggle('open');
-  }
-  function openModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-</script>
-
-
-
-  
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FILIP LIŠKA | Portfolio</title>
+
+  <!-- FONTY -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --brand: #fe6d11;
+      --black: #000;
+      --white: #fff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* --- MENU TOGGLE --- */
+    .menu-toggle {
+      position: fixed;
+      top: 18px;
+      right: 16px;
+      z-index: 20;
+      width: 44px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+    }
+
+    .menu-toggle .hamburger,
+    .menu-toggle .hamburger::before,
+    .menu-toggle .hamburger::after {
+      content: "";
+      display: block;
+      background: var(--white);
+      height: 3px;
+      width: 26px;
+      border-radius: 2px;
+      transition: transform .25s ease, background .25s ease, opacity .25s ease;
+    }
+
+    .menu-toggle .hamburger {
+      position: relative;
+    }
+
+    .menu-toggle .hamburger::before {
+      position: absolute;
+      top: -8px;
+    }
+
+    .menu-toggle .hamburger::after {
+      position: absolute;
+      top: 8px;
+    }
+
+    .full-menu.open ~ .menu-toggle .hamburger,
+    .full-menu.open ~ .menu-toggle .hamburger::before,
+    .full-menu.open ~ .menu-toggle .hamburger::after {
+      background: #000;
+    }
+
+    /* --- FULLSCREEN MENU (sjednoceno podle hlavní stránky) --- */
+    .full-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--brand);
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform .45s ease-in-out;
+      z-index: 15;
+      padding: 96px 24px 32px;
+    }
+
+    .full-menu.open {
+      transform: translateY(0);
+    }
+
+    .menu-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6vh;
+    }
+
+    .menu-content a {
+      font-family: 'Bebas Neue', sans-serif;
+      text-decoration: none;
+      color: #000;
+      text-transform: uppercase;
+      font-size: clamp(44px, 9vw, 96px);
+      transition: color .2s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .menu-content a:hover {
+      color: #fff;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 28px;
+      padding: 8px 0 6px;
+    }
+
+    .social-links a {
+      color: #000;
+      font-size: 28px;
+      transition: color .2s;
+    }
+
+    .social-links a:hover {
+      color: #fff;
+    }
+
+    /* --- SEKCE PORTFOLIO --- */
+    .section-portfolio {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-portfolio .gradient-text {
+      font-size: 12rem;
+      color: var(--brand);
+      letter-spacing: 4px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- ACCORDEONY --- */
+    .section-accordions {
+      position: relative;
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 0 80px;
+      overflow: hidden;
+    }
+
+    /* --- Oranžové čáry pouze v této sekci --- */
+    .section-accordions::before,
+    .section-accordions::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--brand);
+    }
+
+    .section-accordions::before {
+      top: 0;
+    }
+
+    .section-accordions::after {
+      bottom: 0;
+    }
+
+    /* ACCORDEON STYL */
+    .accordion {
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .accordion-item {
+      border-bottom: 3px solid #111;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      background: #000;
+      color: var(--brand);
+      text-align: left;
+      padding: 20px 40px;
+      font-size: 36px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .accordion-header::after {
+      content: "+";
+      font-size: 32px;
+      color: var(--brand);
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-header::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+
+    .accordion-header:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      background: #000;
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      transition: max-height 0.8s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.6s ease;
+      opacity: 0;
+    }
+
+    .accordion-item.active .accordion-content {
+      opacity: 1;
+      max-height: 1200px;
+    }
+
+    /* OBSAH */
+    .portfolio-track {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .portfolio-item {
+      width: 320px;
+      background: #111;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-item:hover { transform: translateY(-5px); }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .portfolio-item p {
+      margin: 15px 0;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .rounded-button {
+      display: inline-block;
+      padding: 8px 20px;
+      border: 2px solid white;
+      border-radius: 20px;
+      background-color: transparent;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .rounded-button:hover {
+      background-color: white;
+      color: black;
+      transform: scale(1.05);
+    }
+
+    .video-track {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .video-item {
+      width: 80%;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .video-item iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .video-item p {
+      margin-top: 10px;
+      font-size: 20px;
+      color: var(--brand);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <!-- tlačítko pro otevření -->
-    <div class="menu-toggle" onclick="document.getElementById('fullMenu').classList.toggle('open')">☰</div>
-  
-    <!-- celé menu -->
-    <div class="full-menu" id="fullMenu">
 
-  
-      <div class="menu-content">
-        <h1><a href="index.html">HLAVNÍ</a></h1>
-        <h1><a href="galerie.html">PORTFOLIO</a></h1>
-        <h1><a href="kurz.html">SNOWBOARDING</a></h1>
-        <h1><a href="Board.html">OVERVIEW</a></h1>
-      </div>
-  
-      <!-- sociální sítě -->
-      <div class="social-links">
-        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-      </div>
+  <!-- FULLSCREEN MENU -->
+  <nav class="full-menu" id="fullMenu">
+    <div class="menu-content">
+      <a href="index.html">Hlavní</a>
+      <a href="galerie.html">Portfolio</a>
+      <a href="kurz.html">Snowboarding</a>
+      <a href="Board.html">Overview</a>
     </div>
-  </header>
-  
-  <div class="gradient-section">
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </nav>
+
+  <!-- MENU TOGGLE -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu">
+    <span class="hamburger"></span>
+  </button>
+
+  <!-- HERO -->
+  <section class="section-portfolio">
     <div class="gradient-text">PORTFOLIO</div>
-</div>
+  </section>
 
-<section class="portfolio-library">
-  <h2>Moje projekty</h2>
-  <div class="portfolio-carousel">
-    <div class="portfolio-track">
-
-      <!-- Web 1 – online -->
-      <div class="portfolio-item">
-        <img src="web1.jpg" alt="Náhled Webu 1">
-        <p>Pracovní školní web</p>
-        <a href="https://school-project-csa.pages.dev" target="_blank" class="rounded-button">Zobrazit</a>
-      </div>
-
-      <!-- Web 2 – modal -->
-      <div class="portfolio-item">
-        <img src="web2.jpg" alt="Náhled Webu 2">
-        <p>Ukazkový web</p>
-        <button class="rounded-button" onclick="openModal('web2Modal')">Zobrazit</button>
-      </div>
-
-      <!-- Web 3 – modal -->
-      <div class="portfolio-item">
-        <img src="images/web3-thumbnail.jpg" alt="Náhled Webu 3">
-        <p>Web 3 – krátký popis projektu.</p>
-        <button class="rounded-button" onclick="openModal('web3Modal')">Zobrazit</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- MODALY -->
-<!-- Web 2 Modal -->
-<div id="web2Modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('web2Modal')">&times;</span>
-    <div class="image-gallery">
-      <img src="web2.jpg" alt="Web2 Screenshot 1">
-      <img src="web1.1.jpg" alt="Web2 Screenshot 2">
-    </div>
-  </div>
-</div>
-
-<!-- Web 3 Modal -->
-<div id="web3Modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('web3Modal')">&times;</span>
-    <div class="image-gallery">
-      <img src="web3-1.jpg" alt="Web3 Screenshot 1">
-      <img src="web3-2.jpg" alt="Web3 Screenshot 2">
-    </div>
-  </div>
-</div>
-
-    <!-- Accordion wrapper -->
-<div class="accordion">
-
-  <!-- USA -->
-  <div class="accordion-item">
-    <button class="accordion-header">USA2025</button>
-    <div class="accordion-content">
-      <div class="video-carousel">
-        <div class="video-track">
-          <div class="video-item">
-            <iframe src="https://www.youtube.com/embed/qucVos3GVlQ?si=RTeKBJtrCVIElQ9P" frameborder="0" allowfullscreen></iframe>
-            <p>USA 1#</p>
+  <!-- ACCORDEONY -->
+  <section class="section-accordions">
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header">Moje projekty</button>
+        <div class="accordion-content">
+          <div class="portfolio-track">
+            <div class="portfolio-item">
+              <img src="web1.jpg" alt="">
+              <p>Školní web</p>
+              <a href="https://school-project-csa.pages.dev" class="rounded-button">Zobrazit</a>
+            </div>
+            <div class="portfolio-item">
+              <img src="web2.jpg" alt="">
+              <p>Ukázkový web</p>
+              <a href="#" class="rounded-button">Zobrazit</a>
+            </div>
           </div>
-          <div class="video-item">
-            <iframe src="https://www.youtube.com/embed/WBVfUa5saI4?si=D4s6_IlZ_zMMvSQJ" frameborder="0" allowfullscreen></iframe>
-            <p>USA 2#</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Grafika & Sociální sítě</button>
+        <div class="accordion-content">
+          <div class="video-track">
+            <div class="video-item">
+              <iframe src="https://www.youtube.com/embed/qucVos3GVlQ" frameborder="0" allowfullscreen></iframe>
+              <p>Reels 1</p>
+            </div>
           </div>
-          <div class="video-item">
-            <iframe src="https://www.youtube.com/embed/IWJLnKNHkwE?si=9cOJrkC-L4z97DyP" frameborder="0" allowfullscreen></iframe>
-            <p>mini USA 3#</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header">Spolupráce</button>
+        <div class="accordion-content">
+          <div class="video-track">
+            <div class="video-item">
+              <iframe src="https://www.youtube.com/embed/MJZSpID2pjU" frameborder="0" allowfullscreen></iframe>
+              <p>Projekt klienta</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Cape Verde -->
-  <div class="accordion-item">
-    <button class="accordion-header">CapeVerde2025</button>
-    <div class="accordion-content">
-      <div class="video-carousel">
-        <div class="video-track">
-          <div class="video-item">
-            <iframe src="https://www.youtube.com/embed/MJZSpID2pjU?si=82cmvqASovO7vY1M" frameborder="0" allowfullscreen></iframe>
-            <p>Zip Line</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('fullMenu');
+    toggle.addEventListener('click', () => menu.classList.toggle('open'));
 
-</div>
-
-    
-
-
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => header.parentElement.classList.toggle('active'));
+    });
+  </script>
 </body>
 </html>

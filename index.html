@@ -2,17 +2,23 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FILIP LIŠKA</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="icon" type="image/png" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/Geometrická hlava lišky.png" />
 
   <style>
+    :root {
+      --brand: #fe6d11;
+      --black: #000;
+      --white: #fff;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -21,221 +27,243 @@
 
     html, body {
       height: 100%;
-      font-family: 'Bebas Neue', sans-serif;
-      background: url('ja3.JPG') no-repeat center center fixed;
-      background-size: cover;
-      color: #fe6d11;
+      background: var(--black);
+      color: var(--brand);
+      font-family: 'Anton', sans-serif;
+      overflow-x: hidden;
     }
 
-   .menu-toggle {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 32px;
-  cursor: pointer;
-  z-index: 1001;
-  color: white;
-  transition: color 0.3s ease;
-}
-
-/* pokud je menu otevřené, tlačítko změní barvu */
-.full-menu.open ~ .menu-toggle,
-.full-menu.open + .menu-toggle {
-  color: black;
-}
-
-.full-menu {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fe6d11;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;   /* rozdělí obsah a social */
-  align-items: center;
-  transition: top 0.6s ease-in-out;
-  z-index: 1000;
-  padding: 0;
-}
-
-.full-menu.open {
-  top: 0;
-}
-
-.full-menu .close-btn {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  background: none;
-  border: none;
-  font-size: 36px;
-  color: white;
-  cursor: pointer;
-}
-
-/* odkazy zpět na přesný střed */
-.menu-wrapper {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;   /* místo center, aby šly dolů */
-  justify-content: center;
-  padding-top: 20vh;         /* posune odkazy níž od horní části */
-}
-
-.menu-content h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 100px;          /* větší text */
-  font-weight: 400;
-  margin: 25px 0;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.menu-content h1 a {
-  color: black;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.menu-content h1 a:hover {
-  color: white;
-}
-
-/* sociální odkazy menší a níž */
-.social-links {
-  padding-bottom: 20px;      /* blíž spodnímu okraji */
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-}
-
-.social-links a {
-  color: black;
-  font-size: 28px;           /* zmenšeno */
-  transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-  color: white;
-}
-
-/* --- MOBILNÍ ÚPRAVY --- */
-@media (max-width: 768px) {
-  .full-menu {
-    justify-content: flex-start;
-    padding-top: 15vh;              /* odkazy trochu níž */
-  }
-
-  .menu-content h1 {
-    font-size: 85px;                /* ještě větší text */
-    margin: 18px 0;
-  }
-
-  .social-links {
-    margin-top: 35px;               /* odstup pod odkazy */
-    padding-bottom: 15px;           /* blíž ke spodnímu okraji */
-    gap: 30px;                      /* víc místa mezi ikonami */
-  }
-
-  .social-links a {
-    font-size: 34px;                /* zvětšené ikony */
-  }
-}
-
-
-    .title {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
+    /* --- Fixed black bars --- */
+    .bar {
+      position: fixed;
+      left: 0;
       width: 100%;
-      padding: 0 10px;
+      height: 64px;
+      background: #000;
+      z-index: 5;
     }
 
-    .title h1 {
-      font-size: 12em;
+    .bar.top { top: 0; }
+    .bar.bottom { bottom: 0; }
+
+    /* --- Hamburger --- */
+    .menu-toggle {
+      position: fixed;
+      top: 18px;
+      right: 28px;
+      z-index: 20;
+      width: 44px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+    }
+
+    .menu-toggle .hamburger,
+    .menu-toggle .hamburger::before,
+    .menu-toggle .hamburger::after {
+      content: "";
+      display: block;
+      background: var(--white);
+      height: 3px;
+      width: 26px;
+      border-radius: 2px;
+      transition: transform .25s ease, background .25s ease, opacity .25s ease;
+    }
+
+    .menu-toggle .hamburger {
+      position: relative;
+    }
+
+    .menu-toggle .hamburger::before {
+      position: absolute;
+      top: -8px;
+    }
+
+    .menu-toggle .hamburger::after {
+      position: absolute;
+      top: 8px;
+    }
+
+    .full-menu.open ~ .menu-toggle .hamburger,
+    .full-menu.open ~ .menu-toggle .hamburger::before,
+    .full-menu.open ~ .menu-toggle .hamburger::after {
+      background: #000;
+    }
+
+    /* --- HERO section --- */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 5vw 12vh;
+      background: #000;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Fotka - okraje a ořez spodku */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 64px;
+      left: 5vw;
+      right: 5vw;
+      bottom: 20vh; /* ořez odspoda */
+      background: url('fl.JPG') center center / cover no-repeat;
+      z-index: -1;
+      filter: brightness(0.9);
+    }
+
+    /* --- Titulek --- */
+    .title {
+      position: relative;
+      z-index: 2;
+      text-align: center;
       line-height: 0.9;
-      white-space: nowrap;
-      animation: fadeIn 1s ease-out forwards;
+      user-select: none;
+      animation: fadeIn .6s ease-out both;
+      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
     }
+
+    .title .line {
+      display: block;
+      font-weight: 800;
+      font-size: clamp(38px, 13.5vw, 160px);
+      transform: scaleX(1.5); /* výraznější horizontální roztažení */
+      letter-spacing: 0.05em;  /* větší mezery mezi písmeny */
+    }
+
+    .title .line.bottom {
+      font-size: clamp(34px, 12vw, 145px);
+      margin-top: 0.15em;
+      transform: scaleX(1.5); /* výraznější horizontální roztažení */
+      letter-spacing: 0.05em;  /* větší mezery mezi písmeny */
+    }
+
     @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  } to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-    @media (max-width: 1200px) {
-      .title h1 {
-        font-size: 8em;
-      }
-      .menu-content h1 {
-        font-size: 60px;
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 768px) {
-      .title h1 {
-        font-size: 5em;
-      }
-      .menu-content h1 {
-        font-size: 50px;
-      }
+    /* --- Fullscreen menu --- */
+    .full-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--brand);
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transform: translateY(-100%);
+      transition: transform .45s ease-in-out;
+      z-index: 15;
+      padding: 96px 24px 32px;
     }
 
-    @media (max-width: 480px) {
-      .title h1 {
-        font-size: 3.5em;
-        white-space: normal;
-      }
-      .menu-toggle {
-        top: 15px;
-        right: 20px;
-        font-size: 28px;
-      }
-      .full-menu .close-btn {
-        top: 15px;
-        right: 20px;
-        font-size: 28px;
-      }
-      .menu-content h1 {
-        font-size: 48px;
-      }
+    .full-menu.open {
+      transform: translateY(0);
     }
-    
+
+    .menu-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6vh;
+    }
+
+    .menu-content a {
+      font-family: 'Bebas Neue', sans-serif;
+      text-decoration: none;
+      color: #000;
+      text-transform: uppercase;
+      font-size: clamp(44px, 9.2vw, 96px);
+      transition: color .2s ease;
+      letter-spacing: 0.03em;
+    }
+
+    .menu-content a:hover {
+      color: #fff;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 28px;
+      padding: 8px 0 6px;
+    }
+
+    .social-links a {
+      color: #000;
+      font-size: 28px;
+      transition: color .2s;
+    }
+
+    .social-links a:hover {
+      color: #fff;
+    }
+
+    /* --- Mobile adjustments --- */
+    @media (max-width: 640px) {
+      .menu-toggle { top: 14px; right: 18px; }
+      .bar { height: 54px; }
+      .hero { padding: 0 6vw 10vh; }
+      .hero::before { top: 54px; left: 6vw; right: 6vw; bottom: 22vh; }
+      .social-links a { font-size: 32px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- === MENU === -->
-  <div class="menu-toggle" onclick="document.getElementById('fullMenu').classList.toggle('open')">☰</div>
-  <div class="full-menu" id="fullMenu">
-    <div class="menu-content">
-      <h1><a href="index.html">HLAVNÍ</a></h1>
-      <h1><a href="galerie.html">PORTFOLIO</a></h1>
-      <h1><a href="kurz.html">SNOWBOARDING</a></h1>
-      <h1><a href="Board.html">OVERVIEW</a></h1>
-    </div>
-      <!-- Sociální sítě -->
-  <div class="social-links">
-    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-  </div>
-  </div>
+  <!-- Černé pruhy -->
+  <div class="bar top" aria-hidden="true"></div>
+  <div class="bar bottom" aria-hidden="true"></div>
 
-  <!-- === TITLE === -->
-  <div class="title">
-    <h1>FILIP LIŠKA</h1>
-  </div>
+  <!-- Fullscreen menu -->
+  <nav class="full-menu" id="fullMenu" aria-hidden="true">
+    <div class="menu-content" role="menu">
+      <a href="index.html" role="menuitem">Hlavní</a>
+      <a href="galerie.html" role="menuitem">Portfolio</a>
+      <a href="kurz.html" role="menuitem">Snowboarding</a>
+      <a href="Board.html" role="menuitem">Overview</a>
+    </div>
+    <div class="social-links" aria-label="Sociální sítě">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </nav>
+
+  <!-- Hamburger -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false" aria-controls="fullMenu">
+    <span class="hamburger"></span>
+  </button>
+
+  <!-- HERO -->
+  <section class="hero" role="img" aria-label="Fotka v pozadí">
+    <h1 class="title">
+      <span class="line top">FILIP</span>
+      <span class="line bottom">LIŠKA</span>
+    </h1>
+  </section>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('fullMenu');
+    toggle.addEventListener('click', () => {
+      const open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
 
 </body>
 </html>

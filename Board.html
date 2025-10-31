@@ -199,123 +199,94 @@ body {
 /* ==================================================
    MENU FULLSCREEN
 ================================================== */
+
 .menu-toggle {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  font-size: 32px;
+  position: fixed;
+  top: 18px;
+  right: 16px;
+  z-index: 20;
+  width: 44px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  z-index: 1001;
-  color: white;
-  transition: color 0.3s ease;
+  background: transparent;
+  border: 0;
 }
-
-/* pokud je menu otevřené, tlačítko změní barvu */
-.full-menu.open ~ .menu-toggle,
-.full-menu.open + .menu-toggle {
-  color: black;
+.menu-toggle .hamburger,
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+  content: "";
+  display: block;
+  background: white;
+  height: 3px;
+  width: 26px;
+  border-radius: 2px;
+  transition: transform .25s ease, background .25s ease, opacity .25s ease;
 }
-
+.menu-toggle .hamburger {
+  position: relative;
+}
+.menu-toggle .hamburger::before {
+  position: absolute;
+  top: -8px;
+}
+.menu-toggle .hamburger::after {
+  position: absolute;
+  top: 8px;
+}
 .full-menu {
   position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: #fe6d11;
-  color: white;
+  color: #000;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;   /* rozdělí obsah a social */
   align-items: center;
-  transition: top 0.6s ease-in-out;
-  z-index: 1000;
-  padding: 0;
+  justify-content: space-between;
+  transform: translateY(-100%);
+  transition: transform .45s ease-in-out;
+  z-index: 15;
+  padding: 96px 24px 32px;
 }
-
 .full-menu.open {
-  top: 0;
+  transform: translateY(0);
 }
-
-.full-menu .close-btn {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  background: none;
-  border: none;
-  font-size: 36px;
-  color: white;
-  cursor: pointer;
-}
-
-/* odkazy zpět na přesný střed */
-.menu-wrapper {
-  flex: 1;
+.menu-content {
+  width: 100%;
   display: flex;
-  align-items: flex-start;   /* místo center, aby šly dolů */
-  justify-content: center;
-  padding-top: 20vh;         /* posune odkazy níž od horní části */
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6vh;
 }
-
-.menu-content h1 {
+.menu-content a {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 100px;          /* větší text */
-  font-weight: 400;
-  margin: 25px 0;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.menu-content h1 a {
-  color: black;
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: #000;
+  text-transform: uppercase;
+  font-size: clamp(44px, 9.2vw, 96px);
+  transition: color .2s ease;
+  letter-spacing: 0.03em;
 }
-
-.menu-content h1 a:hover {
-  color: white;
+.menu-content a:hover {
+  color: #fff;
 }
-
-/* sociální odkazy menší a níž */
 .social-links {
-  padding-bottom: 20px;      /* blíž spodnímu okraji */
   display: flex;
-  gap: 25px;
-  justify-content: center;
+  gap: 28px;
+  padding: 8px 0 6px;
 }
-
 .social-links a {
-  color: black;
-  font-size: 28px;           /* zmenšeno */
-  transition: color 0.3s ease;
+  color: #000;
+  font-size: 28px;
+  transition: color .2s;
 }
-
 .social-links a:hover {
-  color: white;
+  color: #fff;
 }
 
-/* --- MOBILNÍ ÚPRAVY --- */
-@media (max-width: 768px) {
-  .full-menu {
-    justify-content: flex-start;
-    padding-top: 15vh;              /* odkazy trochu níž */
-  }
-
-  .menu-content h1 {
-    font-size: 85px;                /* ještě větší text */
-    margin: 18px 0;
-  }
-
-  .social-links {
-    margin-top: 35px;               /* odstup pod odkazy */
-    padding-bottom: 15px;           /* blíž ke spodnímu okraji */
-    gap: 30px;                      /* víc místa mezi ikonami */
-  }
-
-  .social-links a {
-    font-size: 34px;                /* zvětšené ikony */
-  }
-}
 
 /* ==================================================
    FOOTER
@@ -458,29 +429,44 @@ footer {
 <body>
 
   <!-- Navigace -->
-  <header>
-    <!-- tlačítko pro otevření -->
-    <div class="menu-toggle" onclick="document.getElementById('fullMenu').classList.toggle('open')">☰</div>
-  
-    <!-- celé menu -->
-    <div class="full-menu" id="fullMenu">
+  <!-- Navigace -->
+<header>
+  <!-- Černé pruhy -->
+  <div class="bar top" aria-hidden="true"></div>
+  <div class="bar bottom" aria-hidden="true"></div>
 
-  
-      <div class="menu-content">
-        <h1><a href="index.html">HLAVNÍ</a></h1>
-        <h1><a href="galerie.html">PORTFOLIO</a></h1>
-        <h1><a href="kurz.html">SNOWBOARDING</a></h1>
-        <h1><a href="Board.html">OVERVIEW</a></h1>
-      </div>
-  
-      <!-- sociální sítě -->
-      <div class="social-links">
-        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
-      </div>
+  <!-- Fullscreen menu -->
+  <nav class="full-menu" id="fullMenu" aria-hidden="true">
+    <div class="menu-content" role="menu">
+      <a href="index.html" role="menuitem">Hlavní</a>
+      <a href="galerie.html" role="menuitem">Portfolio</a>
+      <a href="kurz.html" role="menuitem">Snowboarding</a>
+      <a href="Board.html" role="menuitem">Overview</a>
     </div>
-  </header>
+    <div class="social-links" aria-label="Sociální sítě">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </nav>
+
+  <!-- Hamburger -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false" aria-controls="fullMenu">
+    <span class="hamburger"></span>
+  </button>
+</header>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('fullMenu');
+  toggle.addEventListener('click', () => {
+    const open = !menu.classList.contains('open');
+    menu.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-hidden', String(!open));
+  });
+</script>
+
 
   <!-- Úvodní text -->
   <div class="gradient-section">
@@ -490,7 +476,7 @@ footer {
  <!-- Sekce 1: CONTACT -->
 <section class="contact-section">
     <div class="contact-content">
-      <h1>PLÁN 2026</h1>
+      <h1>ZÁVODY</h1>
       <p>Akce, výzvy, závody<br>2026 bude nabité..</p>
       <div class="circle-button" onclick="openPanel('contact')">→</div>
     </div>
