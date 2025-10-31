@@ -404,7 +404,100 @@ footer {
 .register-button:hover {
   background: #0056b3;
 }
+/* ===== 📱 MOBILE-ONLY OVERRIDES (ponechá desktop beze změn) ===== */
 
+/* tablety + mobily */
+@media (max-width: 768px) {
+  /* Úvodní nadpis (PORTFOLIO/OVERVIEW v .gradient-section) */
+  .gradient-text {
+    font-size: 6rem;         /* z 12rem na 6rem na menších šířkách */
+    letter-spacing: 3px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  /* Navigace nahoře */
+  .navbar {
+    padding: 10px 20px;
+  }
+  .center-nav {
+    gap: 28px;
+  }
+  .center-nav a {
+    font-size: 16px;
+  }
+  .logo img {
+    width: 64px;
+  }
+
+  /* Kontakt sekce (oranžová) */
+  .contact-content h1 {
+    font-size: 72px;         /* z 140px na 72px */
+    letter-spacing: 3px;
+    line-height: 1.1;
+  }
+  .contact-content p {
+    font-size: 20px;
+  }
+  .circle-button {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
+
+  /* Panely (slide-in) – na mobilu přes celou šířku */
+  .side-panel {
+    max-width: 100%;
+  }
+}
+
+/* malé telefony (iPhone SE apod.) */
+@media (max-width: 480px) {
+  .gradient-text {
+    font-size: 4rem;         /* ještě o krok menší */
+    letter-spacing: 2px;
+  }
+
+  .center-nav {
+    gap: 18px;
+  }
+  .center-nav a {
+    font-size: 14px;
+  }
+
+  .contact-content h1 {
+    font-size: 48px;
+    letter-spacing: 2px;
+  }
+  .contact-content p {
+    font-size: 16px;
+  }
+  .circle-button {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  /* pozadí hor – lehké přiblížení a posun, ať to na mobilu líp sedí */
+  body {
+    background-size: 70%, 70%;
+    background-position: left -100px center, right -100px center;
+  }
+
+  /* hamburger lehce menší a blíž k okraji */
+  .menu-toggle {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 28px;
+  }
+  .menu-toggle .hamburger,
+  .menu-toggle .hamburger::before,
+  .menu-toggle .hamburger::after {
+    width: 22px;
+    height: 2px;
+  }
+}
 
   </style>
   <script>

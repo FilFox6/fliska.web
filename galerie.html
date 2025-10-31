@@ -32,112 +32,192 @@
     }
 
     /* --- MENU TOGGLE --- */
-    .menu-toggle {
-      position: fixed;
-      top: 18px;
-      right: 16px;
-      z-index: 20;
-      width: 44px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      background: transparent;
-      border: 0;
-    }
+    :root {
+  --brand: #fe6d11;
+  --black: #000;
+  --white: #fff;
+}
 
-    .menu-toggle .hamburger,
-    .menu-toggle .hamburger::before,
-    .menu-toggle .hamburger::after {
-      content: "";
-      display: block;
-      background: var(--white);
-      height: 3px;
-      width: 26px;
-      border-radius: 2px;
-      transition: transform .25s ease, background .25s ease, opacity .25s ease;
-    }
+/* --- MENU TOGGLE --- */
+.menu-toggle {
+  position: fixed;
+  top: 18px;
+  right: 16px;
+  z-index: 20;
+  width: 44px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
 
-    .menu-toggle .hamburger {
-      position: relative;
-    }
+.menu-toggle .hamburger,
+.menu-toggle .hamburger::before,
+.menu-toggle .hamburger::after {
+  content: "";
+  display: block;
+  background: var(--white);
+  height: 3px;
+  width: 26px;
+  border-radius: 2px;
+  transition: transform .25s ease, background .25s ease, opacity .25s ease;
+}
 
-    .menu-toggle .hamburger::before {
-      position: absolute;
-      top: -8px;
-    }
+.menu-toggle .hamburger {
+  position: relative;
+}
 
-    .menu-toggle .hamburger::after {
-      position: absolute;
-      top: 8px;
-    }
+.menu-toggle .hamburger::before {
+  position: absolute;
+  top: -8px;
+}
 
-    .full-menu.open ~ .menu-toggle .hamburger,
-    .full-menu.open ~ .menu-toggle .hamburger::before,
-    .full-menu.open ~ .menu-toggle .hamburger::after {
-      background: #000;
-    }
+.menu-toggle .hamburger::after {
+  position: absolute;
+  top: 8px;
+}
 
-    /* --- FULLSCREEN MENU (sjednoceno podle hlavní stránky) --- */
-    .full-menu {
-      position: fixed;
-      inset: 0;
-      background: var(--brand);
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      transform: translateY(-100%);
-      transition: transform .45s ease-in-out;
-      z-index: 15;
-      padding: 96px 24px 32px;
-    }
+/* --- Stav při otevření menu --- */
+.full-menu.open ~ .menu-toggle .hamburger {
+  background: transparent;
+}
+.full-menu.open ~ .menu-toggle .hamburger::before {
+  transform: rotate(45deg);
+  top: 0;
+  background: #000;
+}
+.full-menu.open ~ .menu-toggle .hamburger::after {
+  transform: rotate(-45deg);
+  top: 0;
+  background: #000;
+}
 
-    .full-menu.open {
-      transform: translateY(0);
-    }
+/* --- FULLSCREEN MENU --- */
+.full-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--brand);
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-100%);
+  transition: transform .45s ease-in-out;
+  z-index: 15;
+  padding: 96px 24px 32px;
+}
 
-    .menu-content {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-top: 6vh;
-    }
+.full-menu.open {
+  transform: translateY(0);
+}
 
-    .menu-content a {
-      font-family: 'Bebas Neue', sans-serif;
-      text-decoration: none;
-      color: #000;
-      text-transform: uppercase;
-      font-size: clamp(44px, 9vw, 96px);
-      transition: color .2s ease;
-      letter-spacing: 0.03em;
-    }
+.menu-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6vh;
+}
 
-    .menu-content a:hover {
-      color: #fff;
-    }
+.menu-content a {
+  font-family: 'Bebas Neue', sans-serif;
+  text-decoration: none;
+  color: #000;
+  text-transform: uppercase;
+  font-size: clamp(40px, 9vw, 96px);
+  transition: color .2s ease;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
 
-    .social-links {
-      display: flex;
-      gap: 28px;
-      padding: 8px 0 6px;
-    }
+.menu-content a:hover {
+  color: #fff;
+}
 
-    .social-links a {
-      color: #000;
-      font-size: 28px;
-      transition: color .2s;
-    }
+.social-links {
+  display: flex;
+  gap: 28px;
+  padding: 8px 0 6px;
+}
 
-    .social-links a:hover {
-      color: #fff;
-    }
+.social-links a {
+  color: #000;
+  font-size: 28px;
+  transition: color .2s;
+}
 
+.social-links a:hover {
+  color: #fff;
+}
+
+/* --- 📱 Mobilní verze (tablety, mobily) --- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    top: 12px;
+    right: 14px;
+    width: 36px;
+    height: 28px;
+  }
+
+  .menu-toggle .hamburger,
+  .menu-toggle .hamburger::before,
+  .menu-toggle .hamburger::after {
+    width: 22px;
+    height: 2px;
+  }
+
+  .full-menu {
+    padding: 70px 20px 24px;
+    justify-content: space-evenly;
+  }
+
+  .menu-content {
+    margin-top: 10vh;
+    gap: 6px;
+  }
+
+  .menu-content a {
+    font-size: clamp(32px, 11vw, 60px);
+  }
+
+  .social-links {
+    gap: 20px;
+  }
+
+  .social-links a {
+    font-size: 24px;
+  }
+}
+
+/* --- 📱 Extra malé telefony (iPhone SE apod.) --- */
+@media (max-width: 420px) {
+  .menu-toggle {
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 24px;
+  }
+
+  .menu-toggle .hamburger,
+  .menu-toggle .hamburger::before,
+  .menu-toggle .hamburger::after {
+    width: 20px;
+    height: 2px;
+  }
+
+  .menu-content a {
+    font-size: clamp(26px, 12vw, 48px);
+  }
+
+  .full-menu {
+    padding: 60px 14px 20px;
+  }
+}
     /* --- SEKCE PORTFOLIO --- */
     .section-portfolio {
       min-height: 100vh;
@@ -157,6 +237,17 @@
       opacity: 0;
       animation: fadeIn 1s ease-out forwards;
     }
+    @media (max-width: 768px) {
+  .section-portfolio .gradient-text {
+    font-size: 6rem; /* 📱 na telefonech menší */
+  }
+}
+
+@media (max-width: 480px) {
+  .section-portfolio .gradient-text {
+    font-size: 4rem; /* 📱📱 na velmi malých telefonech ještě menší */
+  }
+}
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -373,7 +464,7 @@
             <div class="portfolio-item">
               <img src="web1.jpg" alt="">
               <p>Školní web</p>
-              <a href="https://school-project-csa.pages.dev" class="rounded-button">Zobrazit</a>
+              <a href="https://school-project-csa.pages.devhttps://school-project-csa.pages.devhttps://school-project-csa.pages.dev" class="rounded-button">Zobrazit</a>
             </div>
             <div class="portfolio-item">
               <img src="web2.jpg" alt="">
