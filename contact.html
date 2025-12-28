@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt – Filip Liška</title>
+  <meta name="description" content="Kontaktujte Filipa Lišku pro spolupráci na video projektech a správě sociálních sítí.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+  <!-- Hamburger Menu Toggle -->
+  <button class="menu-toggle" aria-label="Toggle menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <!-- Fullscreen Menu -->
+  <nav class="menu">
+    <ul class="menu-list">
+      <li><a href="index.html" class="menu-link">Home</a></li>
+      <li><a href="portfolio.html" class="menu-link">Portfolio</a></li>
+      <li><a href="about.html" class="menu-link">About</a></li>
+      <li><a href="contact.html" class="menu-link active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Kontakt</h1>
+      <p>Pojďme spolupracovat</p>
+    </header>
+
+    <section class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3>Email</h3>
+          <a href="mailto:filip@example.com">liskaf64@gmail.com</a>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Sociální sítě</h3>
+          <div class="social-links">
+            <a href="https://www.instagram.com/filip.liska/" class="social-link">Instagram</a>
+            <a href="https://www.linkedin.com/in/filip-liška-3885b1394/" class="social-link">LinkedIn</a>
+            <a href="https://www.tiktok.com/@filip.liska?_r=1&_t=ZN-92b8Ve1XjyI" class="social-link">TikTok</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <h3>Lokalita</h3>
+          <p>Praha, Česká republika</p>
+        </div>
+      </div>
+
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Jméno</label>
+          <input type="text" id="name" name="name" required placeholder="Vaše jméno">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="vas@email.cz">
+        </div>
+        
+        <div class="form-group">
+          <label for="subject">Předmět</label>
+          <input type="text" id="subject" name="subject" placeholder="O čem chcete mluvit?">
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Zpráva</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Vaše zpráva..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn-submit">Odeslat zprávu</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="menu.js"></script>
+</body>
+</html>

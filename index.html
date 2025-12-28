@@ -1,282 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="cs">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FILIP LIŠKA</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filip Liška – Tvůrce videa & Specialista na sociální média</title>
+    <meta name="description" content="Tvůrce videa, střihač a marketingový specialista specializující se na krátký obsah, dynamický střih a sociální média." />
+    <meta name="author" content="Filip Liška" />
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="index.css">
 
-  <link rel="icon" type="image/png" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/Geometrická hlava lišky.png" />
+    <meta property="og:title" content="Filip Liška – Tvůrce videa" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
 
-  <style>
-    :root {
-      --brand: #fe6d11;
-      --black: #000;
-      --white: #fff;
-    }
-  
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-  
-    html, body {
-      height: 100%;
-      background: var(--black);
-      color: var(--brand);
-      font-family: 'Anton', sans-serif;
-      overflow-x: hidden;
-    }
-  
-    /* --- Fixed black bars --- */
-    .bar {
-      position: fixed;
-      left: 0;
-      width: 100%;
-      height: 64px;
-      background: #000;
-      z-index: 5;
-    }
-  
-    .bar.top { top: 0; }
-    .bar.bottom { bottom: 0; }
-  
-    /* --- Hamburger --- */
-    .menu-toggle {
-      position: fixed;
-      top: 18px;
-      right: 28px;
-      z-index: 20;
-      width: 44px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      background: transparent;
-      border: 0;
-    }
-  
-    .menu-toggle .hamburger,
-    .menu-toggle .hamburger::before,
-    .menu-toggle .hamburger::after {
-      content: "";
-      display: block;
-      background: var(--white);
-      height: 3px;
-      width: 26px;
-      border-radius: 2px;
-      transition: transform .25s ease, background .25s ease, opacity .25s ease;
-    }
-  
-    .menu-toggle .hamburger {
-      position: relative;
-    }
-  
-    .menu-toggle .hamburger::before {
-      position: absolute;
-      top: -8px;
-    }
-  
-    .menu-toggle .hamburger::after {
-      position: absolute;
-      top: 8px;
-    }
-  
-    /* --- Animace: hamburger → křížek --- */
-    .menu-toggle.is-open .hamburger {
-      background: transparent;
-    }
-  
-    .menu-toggle.is-open .hamburger::before,
-    .menu-toggle.is-open .hamburger::after {
-      top: 0;
-      background: #000;
-    }
-  
-    .menu-toggle.is-open .hamburger::before {
-      transform: rotate(45deg);
-    }
-  
-    .menu-toggle.is-open .hamburger::after {
-      transform: rotate(-45deg);
-    }
-  
-    /* --- HERO section --- */
-    .hero {
-      position: relative;
-      min-height: 100svh;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 0 5vw 12vh;
-      background: #000;
-      overflow: hidden;
-      isolation: isolate;
-    }
-  
-    /* Fotka - okraje a ořez spodku */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 64px;
-      left: 5vw;
-      right: 5vw;
-      bottom: 20vh;
-      background: url('fl.JPG') center center / cover no-repeat;
-      z-index: -1;
-      filter: brightness(0.9);
-    }
-  
-    /* --- Titulek --- */
-    .title {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      line-height: 0.9;
-      user-select: none;
-      animation: fadeIn .6s ease-out both;
-      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
-    }
-  
-    .title .line {
-      display: block;
-      font-weight: 800;
-      font-size: clamp(38px, 13.5vw, 160px);
-      transform: scaleX(1.5);
-      letter-spacing: 0.05em;
-    }
-  
-    .title .line.bottom {
-      font-size: clamp(34px, 12vw, 145px);
-      margin-top: 0.15em;
-      transform: scaleX(1.5);
-      letter-spacing: 0.05em;
-    }
-  
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  
-    /* --- Fullscreen menu --- */
-    .full-menu {
-      position: fixed;
-      inset: 0;
-      background: var(--brand);
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      transform: translateY(-100%);
-      transition: transform .45s ease-in-out;
-      z-index: 15;
-      padding: 96px 24px 32px;
-    }
-  
-    .full-menu.open {
-      transform: translateY(0);
-    }
-  
-    .menu-content {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-top: 6vh;
-    }
-  
-    .menu-content a {
-      font-family: 'Bebas Neue', sans-serif;
-      text-decoration: none;
-      color: #000;
-      text-transform: uppercase;
-      font-size: clamp(44px, 9.2vw, 96px);
-      transition: color .2s ease;
-      letter-spacing: 0.03em;
-    }
-  
-    .menu-content a:hover {
-      color: #fff;
-    }
-  
-    .social-links {
-      display: flex;
-      gap: 28px;
-      padding: 8px 0 6px;
-    }
-  
-    .social-links a {
-      color: #000;
-      font-size: 28px;
-      transition: color .2s;
-    }
-  
-    .social-links a:hover {
-      color: #fff;
-    }
-  
-    /* --- Mobile adjustments --- */
-    @media (max-width: 640px) {
-      .menu-toggle { top: 14px; right: 18px; }
-      .bar { height: 54px; }
-      .hero { padding: 0 6vw 10vh; }
-      .hero::before { top: 54px; left: 6vw; right: 6vw; bottom: 22vh; }
-      .social-links a { font-size: 32px; }
-    }
-  </style>
-</head>
-<body>
+  <body>
 
-  <!-- Černé pruhy -->
-  <div class="bar top" aria-hidden="true"></div>
-  <div class="bar bottom" aria-hidden="true"></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
 
-  <!-- Fullscreen menu -->
-  <nav class="full-menu" id="fullMenu" aria-hidden="true">
-    <div class="menu-content" role="menu">
-      <a href="index.html" role="menuitem">Hlavní</a>
-      <a href="galerie.html" role="menuitem">Portfolio</a>
-      <a href="kurz.html" role="menuitem">Snowboarding</a>
-      <a href="Board.html" role="menuitem">Overview</a>
-    </div>
-    <div class="social-links" aria-label="Sociální sítě">
-      <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-    </div>
-  </nav>
+    <nav class="menu" id="menuOverlay">
+      <ul class="menu-list">
+        <li><a href="index.html" class="menu-link">Home</a></li>
+        <li><a href="portfolio.html" class="menu-link">Portfolio</a></li>
+        <li><a href="about.html" class="menu-link">About</a></li>
+        <li><a href="contact.html" class="menu-link">Contact</a></li>
+      </ul>
+    </nav>
 
-  <!-- Hamburger -->
-  <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false" aria-controls="fullMenu">
-    <span class="hamburger"></span>
-  </button>
+    <main class="main-content">
+      
+      <section id="home" class="hero">
+        <h1 class="hero-title">FILIP LIŠKA</h1>
+        <p class="hero-subtitle">Content Creator & Social Media Junior</p>
+        <div class="hero-cta">
+          <a href="portfolio.html" class="btn btn-primary">Moje práce</a>
+          <a href="contact.html" class="btn btn-secondary">Kontakt</a>
+        </div>
+      </section>
 
-  <!-- HERO -->
-  <section class="hero" role="img" aria-label="Fotka v pozadí">
-    <h1 class="title">
-      <span class="line top">FILIP</span>
-      <span class="line bottom">LIŠKA</span>
-    </h1>
-  </section>
 
-  <script>
-    const toggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('fullMenu');
-    toggle.addEventListener('click', () => {
-      const open = !menu.classList.contains('open');
-      menu.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', String(open));
-      menu.setAttribute('aria-hidden', String(!open));
-    });
-  </script>
+    </main>
 
-</body>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menuOverlay');
+        const menuLinks = document.querySelectorAll('.menu-link');
+      
+        // Přepínání menu (Open/Close)
+        menuToggle.addEventListener('click', function() {
+          menuToggle.classList.toggle('open');
+          menu.classList.toggle('open');
+          
+          if (menu.classList.contains('open')) {
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = '';
+          }
+        });
+      
+        // Zavření po kliknutí na link
+        menuLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            menuToggle.classList.remove('open');
+            menu.classList.remove('open');
+            document.body.style.overflow = '';
+          });
+        });
+      
+        // Zavření klávesou Esc
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && menu.classList.contains('open')) {
+            menuToggle.classList.remove('open');
+            menu.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

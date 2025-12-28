@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio – Filip Liška</title>
+  <meta name="description" content="Podívejte se na mé portfolio prací pro TV Nova, Beadie, Frameone a další.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+
+  <button class="menu-toggle" aria-label="Toggle menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
+
+  <nav class="menu">
+    <ul class="menu-list">
+      <li><a href="index.html" class="menu-link">Home</a></li>
+      <li><a href="portfolio.html" class="menu-link active">Portfolio</a></li>
+      <li><a href="about.html" class="menu-link">About</a></li>
+      <li><a href="contact.html" class="menu-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Portfolio</h1>
+      <p>Ukázky mé práce</p>
+    </header>
+
+    <section class="portfolio-grid">
+      
+        <article class="portfolio-item" 
+        data-title="TV Nova Casting" 
+        data-desc="Aktuálně působím v castingovém oddělení TV Nova jako asistent castingu. Moje hlavní role ale spočívá ve správě sociálních sítí projektu TV Nova Casting, kde tvořím kompletní grafický design a stříhám dynamická Reels." 
+        data-media="image" 
+        data-src="registrace.JPEG"
+        data-src2="druha_fotka.JPEG" 
+        data-video="https://www.youtube.com/embed/VASE_VIDEO_ID">
+ <div class="portfolio-image">
+   <div class="placeholder-image">TV NOVA CASTING</div>
+ </div>
+ <div class="portfolio-info">
+   <h2>TV Nova Casting</h2>
+   <p>Asistent castingu & Social Media Specialist</p>
+ </div>
+</article>
+
+      <article class="portfolio-item" 
+               data-title="Vyšší hlas" 
+               data-desc="Správa sociálních sítí a tvorba obsahu pro školní rádio Vyšší hlas." 
+               data-media="image" 
+               data-src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=1000">
+        <div class="portfolio-image">
+          <div class="placeholder-image">VYŠŠÍ HLAS</div>
+        </div>
+        <div class="portfolio-info">
+          <h2>Vyšší hlas</h2>
+          <p>Správa sociálních sítí rádia</p>
+        </div>
+      </article>
+
+      <article class="portfolio-item" 
+               data-title="Beadie" 
+               data-desc="Kompletní video produkce pro značku Beadie. Od scénáře po finální color grading." 
+               data-media="image" 
+               data-src="https://images.unsplash.com/photo-1492691523567-6170c24dac83?q=80&w=1000">
+        <div class="portfolio-image">
+          <div class="placeholder-image">BEADIE</div>
+        </div>
+        <div class="portfolio-info">
+          <h2>Beadie</h2>
+          <p>Správa sociálních sítí náramkového profilu</p>
+        </div>
+      </article>
+
+      <article class="portfolio-item" 
+               data-title="Frameone" 
+               data-desc="Kreativní video obsah a postprodukce pro Frameone." 
+               data-media="image" 
+               data-src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000">
+        <div class="portfolio-image">
+          <div class="placeholder-image">FRAMEONE</div>
+        </div>
+        <div class="portfolio-info">
+          <h2>Frameone</h2>
+          <p>Správa sociálních sítí marketingové agentury</p>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="menu.js"></script>
+</body>
+</html>

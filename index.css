@@ -1,0 +1,216 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  
+  /* Menu Toggle Button */
+  .menu-toggle {
+    position: fixed;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    z-index: 1000;
+    width: clamp(30px, 5vw, 40px);
+    height: clamp(24px, 4vw, 32px);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .menu-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  
+  /* Hamburger to X animation */
+  .menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(calc(clamp(24px, 4vw, 32px) / 2 - 1.5px)) rotate(45deg);
+  }
+  
+  .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  
+  .menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(calc(-1 * (clamp(24px, 4vw, 32px) / 2 - 1.5px))) rotate(-45deg);
+  }
+  
+  /* Fullscreen Menu */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fe6d11;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  
+  .menu.open {
+    transform: translateY(0);
+  }
+  
+  .menu-list {
+    list-style: none;
+    text-align: center;
+  }
+  
+  .menu-list li {
+    margin: clamp(0.5rem, 2vw, 1rem) 0;
+  }
+  
+  .menu-link {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .menu-link:hover,
+  .menu-link.active {
+    color: #fff;
+  }
+  
+  /* Main Content */
+  .main-content {
+    min-height: 100vh;
+    padding: clamp(1rem, 3vw, 2rem);
+  }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 15vw, 10rem);
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: #fe6d11;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Buttons */
+  .btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1rem 2rem;
+    border: 2px solid;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #fe6d11;
+    border-color: #fe6d11;
+    color: #000;
+  }
+  
+  .btn-primary:hover {
+    background-color: transparent;
+    color: #fe6d11;
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    border-color: #fff;
+    color: #fff;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* Intro Section */
+  .intro {
+    padding: clamp(3rem, 10vw, 6rem) clamp(1rem, 5vw, 4rem);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .intro h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #fe6d11;
+    margin-bottom: 1rem;
+  }
+  
+  .intro p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #ccc;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 1rem;
+    }
+    
+    .hero-cta {
+      flex-direction: column;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

@@ -1,0 +1,297 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  
+  /* Menu Toggle Button */
+  .menu-toggle {
+    position: fixed;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    z-index: 1000;
+    width: clamp(30px, 5vw, 40px);
+    height: clamp(24px, 4vw, 32px);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .menu-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  
+  .menu-toggle.open .bar:nth-child(1) {
+    transform: translateY(calc(clamp(24px, 4vw, 32px) / 2 - 1.5px)) rotate(45deg);
+  }
+  
+  .menu-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  
+  .menu-toggle.open .bar:nth-child(3) {
+    transform: translateY(calc(-1 * (clamp(24px, 4vw, 32px) / 2 - 1.5px))) rotate(-45deg);
+  }
+  
+  /* Fullscreen Menu */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fe6d11;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  
+  .menu.open {
+    transform: translateY(0);
+  }
+  
+  .menu-list {
+    list-style: none;
+    text-align: center;
+  }
+  
+  .menu-list li {
+    margin: clamp(0.5rem, 2vw, 1rem) 0;
+  }
+  
+  .menu-link {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .menu-link:hover,
+  .menu-link.active {
+    color: #fff;
+  }
+  
+  /* Main Content */
+  .main-content {
+    min-height: 100vh;
+    padding: clamp(4rem, 8vw, 6rem) clamp(1rem, 5vw, 4rem);
+  }
+  
+  /* Page Header */
+  .page-header {
+    text-align: center;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    padding-top: 2rem;
+  }
+  
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-header p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #fe6d11;
+  }
+  
+  /* Portfolio Grid */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .portfolio-item {
+    background-color: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(254, 109, 17, 0.2);
+  }
+  
+  .portfolio-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+  
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: #fe6d11;
+    letter-spacing: 0.1em;
+  }
+  
+  .portfolio-info {
+    padding: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .portfolio-info h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  
+  .portfolio-info p {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    color: #999;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* MODAL STYLES */
+.modal {
+    display: none; /* Skryté v základu */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000; /* Nad hamburgerem */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .modal.active {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: #111;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    position: relative;
+    border-radius: 12px;
+    border: 1px solid #333;
+    padding: clamp(1.5rem, 5vw, 3rem);
+    overflow-y: auto;
+    color: #fff;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    color: #fe6d11;
+    cursor: pointer;
+    line-height: 1;
+  }
+  
+  /* Styl obsahu uvnitř okna */
+  #modal-body h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: #fe6d11;
+    margin-bottom: 1rem;
+  }
+  
+  #modal-body p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+  }
+  
+  .modal-media-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .modal-media-container iframe, 
+  .modal-media-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+  }
+  /* Úprava pro zobrazení více fotek v modálu */
+.modal-media-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Mezera mezi fotkami */
+  }
+  
+  .modal-media-container img {
+    width: 100%;
+    height: auto; /* Aby se fotky nedeformovaly */
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+  .modal-media-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .modal-media-container img, 
+  .modal-media-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Pro zachování formátu videa */
+    border-radius: 8px;
+    display: block;
+  }
+  
+  .modal-media-container img {
+    object-fit: cover; /* Aby se fotka neroztáhla divně */
+  }
