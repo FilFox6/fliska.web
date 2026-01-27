@@ -127,28 +127,40 @@
     color: #fe6d11;
   }
   
-  /* Contact Content */
   .contact-content {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
-  }
-  
-  @media (min-width: 768px) {
+    max-width: 600px; /* Šířka obsahu, aby nebyl moc roztažený */
+    margin: 0 auto;  /* Horizontální centrování celého bloku */
+    display: flex;
+    flex-direction: column; /* Položky (info a formulář) pod sebou */
+    align-items: center;    /* Horizontální centrování položek uvnitř */
+    gap: 3rem;              /* Mezera mezi kontakty a formulářem */
+}
+
+/* Oprava: Odstranění gridu, který způsoboval posun doleva na PC */
+@media (min-width: 768px) {
     .contact-content {
-      grid-template-columns: 1fr 1.5fr;
-      align-items: start;
+        display: flex;      /* Zůstane flex, aby to bylo pod sebou a uprostřed */
+        align-items: center;
+        width: 100%;
     }
-  }
+    
+    .contact-form {
+        width: 100%;        /* Aby formulář nebyl moc úzký */
+    }
+}
   
   /* Contact Info */
   .contact-info {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-  }
+    align-items: center; /* Centrování textů v info bloku */
+    text-align: center;
+}
+  .contact-item {
+    text-align: center;
+    width: 100%;
+    }
   
   .contact-item h3 {
     font-family: 'Bebas Neue', sans-serif;
@@ -176,8 +188,9 @@
   .social-links {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center; /* centrování tlačítek */
     gap: 1rem;
-  }
+    }
   
   .social-link {
     color: #fff;
